@@ -1,0 +1,20 @@
+What's still on the list, besides the modem race:
+
+1. UFS (your item 3):
+   - load test with the driver defaults on the SD root (idle phases with gating and auto-hibernate, read/write, a test file on sde27);
+   - then commit the revert of the hibernate workaround;
+   - HS-G3, with its own test kernel;
+   - the SMMU stream ID, to drop the 32-bit DMA workaround;
+   - finally the current kernel back on the UFS root.
+2. Mobile data (your item 4): ModemManager over QMI/rmnet_ipa0, SIM and APN.
+3. Clean-up afterwards:
+   - remove the temporary zz-verbose.conf and -v in arch-prep;
+   - turn the QRTR debug lines into a proper commit or drop them;
+   - update your repo and post.
+4. Older backlog:
+   - Bluetooth (WCN3998 over UART);
+   - the real display driver (DPU/DSI + NT36672C);
+   - suspend;
+   DONE: - reboot to the bootloader (Motorola's PMIC flag + hard reset);
+   - audio, sensors, USB OTG, NFC, cameras;
+   - reports and upstream patches (qphy for SM7250, IPA SM7250, the QRTR name service, PRR/cpu-map/WLED, bindgen).

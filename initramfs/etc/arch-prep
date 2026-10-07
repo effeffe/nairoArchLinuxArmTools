@@ -236,3 +236,26 @@ W=$R/etc/systemd/system/timers.target.wants
 [ -L "$W/nairo-slot-success.timer" ] || { mkdir -p "$W" &&
 	ln -s /etc/systemd/system/nairo-slot-success.timer "$W/nairo-slot-success.timer" &&
 	log "enabled nairo-slot-success.timer"; }
+
+# Modem: restart it early when its first start stalls (see the script)
+if ! cmp -s /etc/nairo-modem-check "$R/usr/local/bin/nairo-modem-check"; then
+	mkdir -p "$R/usr/local/bin" && cp /etc/nairo-modem-check "$R/usr/local/bin/nairo-modem-check" &&
+		chmod 755 "$R/usr/local/bin/nairo-modem-check" && log "installed nairo-modem-check"
+fi
+own "$R/etc/systemd/system/nairo-modem-check.service" "# nairo: restart the modem early if its first start stalls (nairo initramfs)" <<UNIT
+[Unit]
+Description=Restart the modem early if its first start stalls (nairo)
+After=rmtfs.service
+Wants=rmtfs.service
+
+[Service]
+Type=exec
+ExecStart=/usr/local/bin/nairo-modem-check
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+W=$R/etc/systemd/system/multi-user.target.wants
+[ -L "$W/nairo-modem-check.service" ] || { mkdir -p "$W" &&
+	ln -s /etc/systemd/system/nairo-modem-check.service "$W/nairo-modem-check.service" &&
+	log "enabled nairo-modem-check.service"; }

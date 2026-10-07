@@ -27,6 +27,7 @@ dir /lib 0755 0 0
 dir /lib/modules 0755 0 0
 file /etc/arch-prep initramfs/etc/arch-prep 0755 0 0
 file /etc/nairo-slot-success tools/nairo-slot-success.py 0755 0 0
+file /etc/nairo-modem-check tools/nairo-modem-check.sh 0755 0 0
 file /lib/modules/nt36xxx_spi.ko initramfs/modules/nt36xxx_spi.ko 0644 0 0
 dir /lib/firmware 0755 0 0
 dir /lib/firmware/novatek 0755 0 0
