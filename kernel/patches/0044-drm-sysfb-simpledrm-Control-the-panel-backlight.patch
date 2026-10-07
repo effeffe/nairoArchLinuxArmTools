@@ -1,7 +1,7 @@
 From 50f7c37b144933bbdef848e3dfef6de0c30c67e0 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:11 +0100
-Subject: [PATCH 44/69] drm/sysfb: simpledrm: Control the panel backlight
+Subject: [PATCH 44/70] drm/sysfb: simpledrm: Control the panel backlight
 
 When the framebuffer node references a backlight, turn it off and on
 together with the CRTC. Without this, blanking the display only paints

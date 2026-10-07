@@ -1,7 +1,7 @@
 From 597970e8b547baba00c941cd548e43d7ddc603e2 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 13:33:08 +0100
-Subject: [PATCH 62/69] LOCAL: pmdomain: qcom: rpmhpd: Keep qphy.lvl voted on
+Subject: [PATCH 62/70] LOCAL: pmdomain: qcom: rpmhpd: Keep qphy.lvl voted on
  SM7250
 
 The SM7250 UFS PHY PLL needs the qphy.lvl ARC resource. Downstream votes

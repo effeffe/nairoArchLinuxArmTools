@@ -1,7 +1,7 @@
 From 5da0d7d2194b692e732fe028d7a9b78a89d79035 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:17 +0100
-Subject: [PATCH 14/69] dt-bindings: mmc: sdhci-msm: Add SM7250
+Subject: [PATCH 14/70] dt-bindings: mmc: sdhci-msm: Add SM7250
 
 Add qcom,sm7250-sdhci.
 

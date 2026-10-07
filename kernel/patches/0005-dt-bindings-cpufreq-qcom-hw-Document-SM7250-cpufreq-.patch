@@ -1,7 +1,7 @@
 From abcc4832db746a174d5d7604703471f81a890cdb Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:46 +0000
-Subject: [PATCH 05/69] dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq
+Subject: [PATCH 05/70] dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq
  hardware
 
 Document the cpufreq hardware on the SM7250 SoC.

@@ -1,7 +1,7 @@
 From f006bc5dafeb0df3f397a17913ba97ab3ff1627e Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:22 +0100
-Subject: [PATCH 30/69] arm64: dts: qcom: Add Motorola Moto G 5G Plus (nairo)
+Subject: [PATCH 30/70] arm64: dts: qcom: Add Motorola Moto G 5G Plus (nairo)
 
 Add the board devicetree: bootloader framebuffer, keys, reserved memory,
 RPMh regulators for USB/UFS/SD, USB 2.0 peripheral mode, UFS, SD card,

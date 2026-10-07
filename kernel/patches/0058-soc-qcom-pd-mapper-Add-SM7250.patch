@@ -1,7 +1,7 @@
 From 4a8ce9b28c02e92b2a1ba44b722de67962f7e229 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Tue, 6 Oct 2026 23:05:46 +0100
-Subject: [PATCH 58/69] soc: qcom: pd-mapper: Add SM7250
+Subject: [PATCH 58/70] soc: qcom: pd-mapper: Add SM7250
 
 SM7250 has the same protection domains as SM6350, among them the modem's
 WLAN PD that ath10k needs.

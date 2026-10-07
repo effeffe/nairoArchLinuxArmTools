@@ -190,3 +190,18 @@ MACAddress=$M
 NamePolicy=kernel
 LINK
 fi
+
+# Wi-Fi board data: Motorola's calibration for this radio variant, picked like
+# Android's cnss-daemon does (NA -> ipa, VZW -> ipav, EMLA -> ipae, else ipa).
+# ath10k finds it as variant=motorola_nairo (device tree); firmware/updates
+# takes precedence over the linux-firmware copy without touching it.
+case "$(sed -n 's/.*androidboot\.radio=\([A-Za-z0-9]*\).*/\1/p' /proc/cmdline)" in
+	VZW) nv=ipav ;;
+	EMLA) nv=ipae ;;
+	*) nv=ipa ;;
+esac
+B=$R/usr/lib/firmware/qcom/sm7250/motorola/nairo/board-2-nairo-$nv.bin
+D=$R/usr/lib/firmware/updates/ath10k/WCN3990/hw1.0/board-2.bin
+if [ -f "$B" ] && ! cmp -s "$B" "$D"; then
+	mkdir -p "${D%/*}" && cp "$B" "$D" && log "installed Wi-Fi board data ${B##*/}"
+fi

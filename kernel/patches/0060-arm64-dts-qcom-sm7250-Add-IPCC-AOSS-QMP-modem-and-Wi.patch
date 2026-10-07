@@ -1,7 +1,7 @@
 From 8590fe7eb796be70954c97f9e6165386df1e5ec0 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Tue, 6 Oct 2026 23:05:46 +0100
-Subject: [PATCH 60/69] arm64: dts: qcom: sm7250: Add IPCC, AOSS QMP, modem and
+Subject: [PATCH 60/70] arm64: dts: qcom: sm7250: Add IPCC, AOSS QMP, modem and
  Wi-Fi
 
 Add the IPCC mailbox, the AOSS QMP channel, the modem smp2p, the modem

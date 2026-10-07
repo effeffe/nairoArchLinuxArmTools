@@ -1,7 +1,7 @@
 From f1a672cca9f131d8762a28da2953aba2d7014996 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:17 +0100
-Subject: [PATCH 13/69] dt-bindings: ufs: qcom,sc7180-ufshc: Add SM7250
+Subject: [PATCH 13/70] dt-bindings: ufs: qcom,sc7180-ufshc: Add SM7250
 
 Add qcom,sm7250-ufshc to the group of UFS hosts without ICE in the host
 node.

@@ -1,7 +1,7 @@
 From be1a6b4e7cd62adc8cc8d2e8636289f6cc3d3911 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:12 +0100
-Subject: [PATCH 50/69] arm64: dts: qcom: sm7250-motorola-nairo: Add backlight
+Subject: [PATCH 50/70] arm64: dts: qcom: sm7250-motorola-nairo: Add backlight
  and fuel gauge
 
 - Enable the PM8150L WLED with the downstream settings (four strings,

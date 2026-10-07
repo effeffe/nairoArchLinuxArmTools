@@ -1,7 +1,7 @@
 From 16dad80fe1ec4d329828ef27a376a7870056df10 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:07 +0100
-Subject: [PATCH 39/69] arm64: dts: qcom: sm7250-motorola-nairo: Enable the GPU
+Subject: [PATCH 39/70] arm64: dts: qcom: sm7250-motorola-nairo: Enable the GPU
 
 Enable the GPU and GMU, and point the zap shader at the device-specific
 signed firmware from the stock vendor image.

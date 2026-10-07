@@ -46,6 +46,8 @@ cp vendor_firmware/mnt_image/ipa_fws.* "$Z/"
 # (/readonly/firmware/image/modem_pr/...); without them it stalls and its
 # watchdog restarts it after 65 s
 cp -r vendor_firmware/mnt_image/modem_pr "$Z/"
+# ath10k board-2.bin per radio variant (arch-prep installs the right one)
+python3 -I tools/make-nairo-board2.py vendor_firmware/mnt_image "$Z" > /dev/null
 
 tar -C "$S" --owner=0 --group=0 -czf out/nairo-modtree.tar.gz usr
-echo "out/nairo-modtree.tar.gz: modules for $V (bring-up, private: $BRINGUP) + a620 zap shader + ipa_fws + modem_pr"
+echo "out/nairo-modtree.tar.gz: modules for $V (bring-up, private: $BRINGUP) + a620 zap shader + ipa_fws + modem_pr + Wi-Fi board data"

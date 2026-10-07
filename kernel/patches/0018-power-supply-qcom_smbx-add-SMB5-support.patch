@@ -1,7 +1,7 @@
 From a9bf3ba47ea5ba5abe6131cbf8c33ad1f832f7ff Mon Sep 17 00:00:00 2001
 From: Casey Connolly <casey.connolly@linaro.org>
 Date: Thu, 20 Aug 2026 12:03:50 +0200
-Subject: [PATCH 18/69] power: supply: qcom_smbx: add SMB5 support
+Subject: [PATCH 18/70] power: supply: qcom_smbx: add SMB5 support
 
 Introduce support for the SMB5 charger found on PM7250B, PM8150B and
 related Qualcomm PMICs.

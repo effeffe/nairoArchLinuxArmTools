@@ -1,7 +1,7 @@
 From 656683008cbf2e408a4240fe984b67fd6abda541 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:20 +0100
-Subject: [PATCH 21/69] arm64: dts: qcom: sm7250: Fix cluster idle-state PSCI
+Subject: [PATCH 21/70] arm64: dts: qcom: sm7250: Fix cluster idle-state PSCI
  parameters
 
 The downstream lito devicetree uses modes 0x224 and 0xc24 for the cluster

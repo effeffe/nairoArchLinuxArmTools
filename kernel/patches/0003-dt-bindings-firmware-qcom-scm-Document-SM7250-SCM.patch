@@ -1,7 +1,7 @@
 From e4ea72ec4f0cb48b71df558df8ba5fb4ba8f6ce0 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:44 +0000
-Subject: [PATCH 03/69] dt-bindings: firmware: qcom,scm: Document SM7250 SCM
+Subject: [PATCH 03/70] dt-bindings: firmware: qcom,scm: Document SM7250 SCM
 
 Document the SCM compatible for Qualcomm SM7250 SoC.
 

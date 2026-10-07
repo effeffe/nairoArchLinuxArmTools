@@ -1,7 +1,7 @@
 From 0f91537be94d258b6c844482cc7114237ae01545 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:07 +0100
-Subject: [PATCH 38/69] arm64: dts: qcom: sm7250: Add GPU, GMU, GPU clock
+Subject: [PATCH 38/70] arm64: dts: qcom: sm7250: Add GPU, GMU, GPU clock
  controller and SMMU
 
 Add the Adreno 620 GPU, its GMU, the GPU clock controller and the GPU

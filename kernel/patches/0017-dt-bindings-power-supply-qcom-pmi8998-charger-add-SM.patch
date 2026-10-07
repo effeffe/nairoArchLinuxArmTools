@@ -1,7 +1,7 @@
 From a738d3b0509a82c2e1ddd20367bb21e7802ff257 Mon Sep 17 00:00:00 2001
 From: Casey Connolly <casey.connolly@linaro.org>
 Date: Thu, 20 Aug 2026 12:03:49 +0200
-Subject: [PATCH 17/69] dt-bindings: power: supply: qcom,pmi8998-charger: add
+Subject: [PATCH 17/70] dt-bindings: power: supply: qcom,pmi8998-charger: add
  SMB5 PMICs
 
 Add compatible strings for PM7250B and PM8150B, which contain the SMB5
