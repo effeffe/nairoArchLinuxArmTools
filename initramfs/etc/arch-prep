@@ -159,7 +159,7 @@ ExecStartPre=-/usr/bin/systemctl restart tqftpserv.service
 ExecStartPre=-/usr/bin/modprobe -r qcom_pd_mapper
 ExecStartPre=/usr/bin/modprobe qcom_pd_mapper
 ExecStart=
-ExecStart=/usr/bin/stdbuf -oL -eL /usr/bin/rmtfs -o /var/lib/rmtfs -r -s -v
+ExecStart=/usr/bin/rmtfs -o /var/lib/rmtfs -r -s
 UNIT
 # ipa must be up before rmtfs starts the modem (rmtfs runs after
 # systemd-modules-load): the modem's IPA startup needs the AP driver
