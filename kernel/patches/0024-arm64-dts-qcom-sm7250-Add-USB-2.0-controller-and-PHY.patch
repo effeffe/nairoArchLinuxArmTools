@@ -1,7 +1,7 @@
 From 770175ceba72c792cc6ec21990db342e1376a737 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:20 +0100
-Subject: [PATCH 24/70] arm64: dts: qcom: sm7250: Add USB 2.0 controller and
+Subject: [PATCH 24/73] arm64: dts: qcom: sm7250: Add USB 2.0 controller and
  PHY
 
 Add the primary DWC3 controller and its Synopsys femto HS PHY. Interrupt

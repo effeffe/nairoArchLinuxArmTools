@@ -1,7 +1,7 @@
 From c6660ee1f3f95484438c8655e37215ec357256e8 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:08 +0100
-Subject: [PATCH 40/70] LOCAL: soc: qcom: ubwc: Match the "qcom,lito" machine
+Subject: [PATCH 40/73] LOCAL: soc: qcom: ubwc: Match the "qcom,lito" machine
  compatible
 
 The nairo bootloader applies the stock dtbo, which replaces the root

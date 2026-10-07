@@ -1,7 +1,7 @@
 From 86db69acd6081cf3b96c336f9e89c82b542d637e Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Tue, 6 Oct 2026 23:05:45 +0100
-Subject: [PATCH 56/70] dt-bindings: remoteproc: qcom,sm6350-pas: Add SM7250
+Subject: [PATCH 56/73] dt-bindings: remoteproc: qcom,sm6350-pas: Add SM7250
  MPSS
 
 The SM7250 modem is a PAS remoteproc with the same resources as the

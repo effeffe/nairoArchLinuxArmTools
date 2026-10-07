@@ -1,7 +1,7 @@
 From da0ed7ba5fd501c94b84697891133b0832f78369 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:22 +0100
-Subject: [PATCH 31/70] LOCAL: arm64: configs: Add nairo bring-up config
+Subject: [PATCH 31/73] LOCAL: arm64: configs: Add nairo bring-up config
  fragment
 
 Config fragment merged on top of defconfig for bring-up: simpledrm,

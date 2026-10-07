@@ -1,7 +1,7 @@
 From facb6d0fa454b1cdbca050aa05bb68f5b5eb1515 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:11 +0100
-Subject: [PATCH 46/70] backlight: qcom-wled: Set the driver data in probe
+Subject: [PATCH 46/73] backlight: qcom-wled: Set the driver data in probe
 
 wled_remove() gets the device through platform_get_drvdata(), but probe
 never set it, so unbinding or unloading the driver dereferences a NULL

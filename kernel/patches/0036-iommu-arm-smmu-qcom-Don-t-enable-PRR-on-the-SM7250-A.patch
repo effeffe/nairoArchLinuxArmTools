@@ -1,7 +1,7 @@
 From d5212711b9cb0f7ed434de426a71316ca6a459ad Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:06 +0100
-Subject: [PATCH 36/70] iommu/arm-smmu-qcom: Don't enable PRR on the SM7250
+Subject: [PATCH 36/73] iommu/arm-smmu-qcom: Don't enable PRR on the SM7250
  Adreno SMMU
 
 Like SM8250, the SM7250 Adreno SMMU does not implement the GFX PRR

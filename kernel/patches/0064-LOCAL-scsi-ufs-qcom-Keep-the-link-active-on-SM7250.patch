@@ -1,7 +1,7 @@
 From 3dbef723bdd449b5316dda1e6b286d8b3ddfdd7e Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 13:33:10 +0100
-Subject: [PATCH 64/70] LOCAL: scsi: ufs: qcom: Keep the link active on SM7250
+Subject: [PATCH 64/73] LOCAL: scsi: ufs: qcom: Keep the link active on SM7250
 
 The SM7250 link failed to leave Hibern8 (PWR_FATAL) and the PHY then
 never initialised again. Disable clock gating, auto-Hibern8 and runtime

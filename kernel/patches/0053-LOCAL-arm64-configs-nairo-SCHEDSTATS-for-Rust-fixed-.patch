@@ -1,7 +1,7 @@
 From ed2cce67f706f639f7b348cf4e833d94aaecbfce Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 22:29:29 +0100
-Subject: [PATCH 53/70] LOCAL: arm64: configs: nairo: SCHEDSTATS for Rust,
+Subject: [PATCH 53/73] LOCAL: arm64: configs: nairo: SCHEDSTATS for Rust,
  fixed release name
 
 - CONFIG_SCHEDSTATS=y: with it off, struct sched_statistics is empty but

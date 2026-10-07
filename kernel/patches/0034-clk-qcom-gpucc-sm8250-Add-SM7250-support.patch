@@ -1,7 +1,7 @@
 From bba231e6d82b024ab44f8f2d1c291a96129dbb1a Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:06 +0100
-Subject: [PATCH 34/70] clk: qcom: gpucc-sm8250: Add SM7250 support
+Subject: [PATCH 34/73] clk: qcom: gpucc-sm8250: Add SM7250 support
 
 The SM7250 (Lito) GPU clock controller matches SM8250 except for the
 GPU_CC_PLL1 configuration: CONFIG_CTL_HI1 is 0x329a699c instead of

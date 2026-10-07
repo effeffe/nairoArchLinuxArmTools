@@ -1,7 +1,7 @@
 From 6d6b626d9631dc9ccfed9168c45e343bc4fdbb59 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Tue, 6 Oct 2026 23:05:46 +0100
-Subject: [PATCH 61/70] arm64: dts: qcom: sm7250-motorola-nairo: Enable modem
+Subject: [PATCH 61/73] arm64: dts: qcom: sm7250-motorola-nairo: Enable modem
  and Wi-Fi
 
 - Add the five Wi-Fi supplies (L1A, L14A, L2C, L10C, L11C) with the

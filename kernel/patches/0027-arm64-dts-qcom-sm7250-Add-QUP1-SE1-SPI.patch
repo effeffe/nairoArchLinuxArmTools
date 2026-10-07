@@ -1,7 +1,7 @@
 From 98c17ad18766b5f4557e9aedb3bc1c19fe60169d Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:21 +0100
-Subject: [PATCH 27/70] arm64: dts: qcom: sm7250: Add QUP1 SE1 SPI
+Subject: [PATCH 27/73] arm64: dts: qcom: sm7250: Add QUP1 SE1 SPI
 
 Add the QUP1 SE1 SPI controller (SPI 354, pins GPIO 6-9 function qup11)
 and the QUP1 wrapper's SMMU stream 0x23 from the downstream devicetree.

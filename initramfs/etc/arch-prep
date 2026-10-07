@@ -159,7 +159,7 @@ ExecStartPre=-/usr/bin/systemctl restart tqftpserv.service
 ExecStartPre=-/usr/bin/modprobe -r qcom_pd_mapper
 ExecStartPre=/usr/bin/modprobe qcom_pd_mapper
 ExecStart=
-ExecStart=/usr/bin/rmtfs -o /var/lib/rmtfs -r -s
+ExecStart=/usr/bin/stdbuf -oL -eL /usr/bin/rmtfs -o /var/lib/rmtfs -r -s -v
 UNIT
 # ipa must be up before rmtfs starts the modem (rmtfs runs after
 # systemd-modules-load): the modem's IPA startup needs the AP driver
@@ -205,3 +205,34 @@ D=$R/usr/lib/firmware/updates/ath10k/WCN3990/hw1.0/board-2.bin
 if [ -f "$B" ] && ! cmp -s "$B" "$D"; then
 	mkdir -p "${D%/*}" && cp "$B" "$D" && log "installed Wi-Fi board data ${B##*/}"
 fi
+
+# A/B slot: mark the booted slot successful once boot has completed, as
+# Android's bootctrl does; without it every boot costs one of the slot's
+# retries and the bootloader eventually falls back to the other slot
+if ! cmp -s /etc/nairo-slot-success "$R/usr/local/bin/nairo-slot-success"; then
+	mkdir -p "$R/usr/local/bin" && cp /etc/nairo-slot-success "$R/usr/local/bin/nairo-slot-success" &&
+		chmod 755 "$R/usr/local/bin/nairo-slot-success" && log "installed nairo-slot-success"
+fi
+own "$R/etc/systemd/system/nairo-slot-success.service" "# nairo: mark the booted A/B slot successful (nairo initramfs)" <<UNIT
+[Unit]
+Description=Mark the booted A/B slot successful once boot has completed (nairo)
+
+[Service]
+Type=oneshot
+# systemd-analyze fails until the boot transaction has finished
+ExecStart=/bin/sh -c "until systemd-analyze >/dev/null 2>&1; do sleep 10; done; exec /usr/local/bin/nairo-slot-success --write"
+UNIT
+own "$R/etc/systemd/system/nairo-slot-success.timer" "# nairo: mark the booted A/B slot successful 90 s after boot (nairo initramfs)" <<UNIT
+[Unit]
+Description=Mark the booted A/B slot successful 90 s after boot (nairo)
+
+[Timer]
+OnBootSec=90s
+
+[Install]
+WantedBy=timers.target
+UNIT
+W=$R/etc/systemd/system/timers.target.wants
+[ -L "$W/nairo-slot-success.timer" ] || { mkdir -p "$W" &&
+	ln -s /etc/systemd/system/nairo-slot-success.timer "$W/nairo-slot-success.timer" &&
+	log "enabled nairo-slot-success.timer"; }

@@ -1,7 +1,7 @@
 From 3f0138f3b73d9827da3769ffdbfd88ef57338c25 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 16:50:50 +0100
-Subject: [PATCH 68/70] arm64: dts: qcom: sm7250: Add IMEM and IPA
+Subject: [PATCH 68/73] arm64: dts: qcom: sm7250: Add IMEM and IPA
 
 Describe the part of IMEM that holds the IPA modem tables (0x146a9000),
 the restart reason the bootloader reads (offset 0x265c, values from the

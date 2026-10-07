@@ -1,7 +1,7 @@
 From 21618ccee61e4a926853a36654168bc190fa78bd Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:20 +0100
-Subject: [PATCH 23/70] arm64: dts: qcom: sm7250: Add apps SMMU
+Subject: [PATCH 23/73] arm64: dts: qcom: sm7250: Add apps SMMU
 
 Add the apps SMMU (MMU-500, Qualcomm implementation). Global fault
 interrupt SPI 65 and 80 context interrupts, as in the downstream live
