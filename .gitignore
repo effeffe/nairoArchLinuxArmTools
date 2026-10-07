@@ -1,0 +1,18 @@
+# built or proprietary; never commit
+/linux/
+/build/
+/out/
+/vendor_firmware/
+/initramfs/bin/
+/initramfs/firmware/
+/initramfs/modules/
+/initramfs/payload/
+/initramfs/root/
+/initramfs/*.cpio.gz
+/initramfs/etc/authorized_keys
+/tools/gen_init_cpio
+/tools/src/
+*_ssh_key
+*.img
+*.tar.gz
+__pycache__/

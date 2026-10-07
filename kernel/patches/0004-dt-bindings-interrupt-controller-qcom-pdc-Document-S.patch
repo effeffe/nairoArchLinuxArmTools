@@ -1,0 +1,29 @@
+From ddfbfb6b8b1213c7c91e857f55511f95c9cadcd7 Mon Sep 17 00:00:00 2001
+From: Sreeshankar K <sreeshankar0910@gmail.com>
+Date: Tue, 1 Sep 2026 09:24:45 +0000
+Subject: [PATCH 04/69] dt-bindings: interrupt-controller: qcom,pdc: Document
+ SM7250 PDC
+
+Document the PDC block on the SM7250 SoC.
+
+Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+ .../devicetree/bindings/interrupt-controller/qcom,pdc.yaml       | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml b/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml
+index be4dc95e3..8401d3b48 100644
+--- a/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml
++++ b/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml
+@@ -51,6 +51,7 @@ properties:
+           - qcom,sdx75-pdc
+           - qcom,sm4450-pdc
+           - qcom,sm6350-pdc
++          - qcom,sm7250-pdc
+           - qcom,sm8150-pdc
+           - qcom,sm8250-pdc
+           - qcom,sm8350-pdc
+-- 
+2.56.0
+

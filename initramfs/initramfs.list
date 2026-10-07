@@ -1,0 +1,36 @@
+# gen_init_cpio list (paths relative to the project root)
+dir /dev 0755 0 0
+nod /dev/console 0600 0 0 c 5 1
+dir /proc 0755 0 0
+dir /sys 0755 0 0
+dir /run 0755 0 0
+dir /tmp 1777 0 0
+dir /bin 0755 0 0
+dir /sbin 0755 0 0
+dir /usr 0755 0 0
+dir /usr/bin 0755 0 0
+dir /usr/sbin 0755 0 0
+file /init initramfs/root/init 0755 0 0
+file /bin/busybox initramfs/bin/busybox 0755 0 0
+slink /bin/sh busybox 0777 0 0
+file /bin/dropbear initramfs/bin/dropbear 0755 0 0
+dir /etc 0755 0 0
+file /etc/rc initramfs/etc/rc 0755 0 0
+file /etc/udhcpd.conf initramfs/etc/udhcpd.conf 0644 0 0
+file /etc/passwd initramfs/etc/passwd 0644 0 0
+file /etc/group initramfs/etc/group 0644 0 0
+file /etc/shells initramfs/etc/shells 0644 0 0
+dir /root 0700 0 0
+dir /root/.ssh 0700 0 0
+file /root/.ssh/authorized_keys initramfs/etc/authorized_keys 0600 0 0
+dir /lib 0755 0 0
+dir /lib/modules 0755 0 0
+file /etc/arch-prep initramfs/etc/arch-prep 0755 0 0
+file /lib/modules/nt36xxx_spi.ko initramfs/modules/nt36xxx_spi.ko 0644 0 0
+dir /lib/firmware 0755 0 0
+dir /lib/firmware/novatek 0755 0 0
+file /lib/firmware/novatek/nt36672c-tianma.bin initramfs/firmware/novatek/nt36672c-tianma.bin 0644 0 0
+dir /payload 0755 0 0
+file /payload/stamp initramfs/payload/stamp 0644 0 0
+file /payload/modules.tar.gz initramfs/payload/modules.tar.gz 0644 0 0
+file /payload/headers.tar.gz initramfs/payload/headers.tar.gz 0644 0 0

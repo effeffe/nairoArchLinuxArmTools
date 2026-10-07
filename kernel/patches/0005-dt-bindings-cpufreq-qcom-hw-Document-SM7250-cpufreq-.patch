@@ -1,0 +1,30 @@
+From abcc4832db746a174d5d7604703471f81a890cdb Mon Sep 17 00:00:00 2001
+From: Sreeshankar K <sreeshankar0910@gmail.com>
+Date: Tue, 1 Sep 2026 09:24:46 +0000
+Subject: [PATCH 05/69] dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq
+ hardware
+
+Document the cpufreq hardware on the SM7250 SoC.
+
+Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml b/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
+index 98eb36bff..2dc2c265c 100644
+--- a/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
++++ b/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
+@@ -29,6 +29,7 @@ properties:
+               - qcom,sdm845-cpufreq-hw
+               - qcom,sm6115-cpufreq-hw
+               - qcom,sm6350-cpufreq-hw
++              - qcom,sm7250-cpufreq-hw
+               - qcom,sm8150-cpufreq-hw
+           - const: qcom,cpufreq-hw
+ 
+-- 
+2.56.0
+

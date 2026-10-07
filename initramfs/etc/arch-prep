@@ -1,0 +1,192 @@
+#!/bin/sh
+# Prepare the Arch Linux ARM root at $1 for headless access over the USB gadget.
+# Idempotent: only adds what is missing, never overwrites existing files.
+R=$1
+exec >/dev/kmsg 2>&1
+log() { echo "nairo-arch-prep: $*"; }
+
+mkdir -p "$R/root/.ssh" && chmod 700 "$R/root/.ssh"
+K=$(cat /root/.ssh/authorized_keys)
+if ! grep -qF "$K" "$R/root/.ssh/authorized_keys" 2>/dev/null; then
+	echo "$K" >> "$R/root/.ssh/authorized_keys"
+	log "added nairo_ssh_key to /root/.ssh/authorized_keys"
+fi
+chmod 600 "$R/root/.ssh/authorized_keys"
+
+# Owned by this script while it keeps its header line: rewritten every boot.
+HDR="# USB gadget network (configfs gadget set up by the nairo initramfs)"
+N=$R/etc/systemd/network/50-usb0.network
+if [ ! -e "$N" ] || [ "$(head -n 1 "$N")" = "$HDR" ]; then
+	mkdir -p "${N%/*}"
+	cat > "$N.new" <<NET
+$HDR
+# DHCP client: share a connection to the phone from the host (e.g.
+# NetworkManager "Shared to other computers"). The fixed gadget MAC gives a
+# stable IPv6 link-local address; mDNS announces the hostname.
+[Match]
+Name=usb0
+
+[Network]
+DHCP=ipv4
+LinkLocalAddressing=ipv6
+IPv6LinkLocalAddressGenerationMode=eui64
+MulticastDNS=yes
+LLMNR=yes
+NET
+	if ! cmp -s "$N.new" "$N"; then
+		mv "$N.new" "$N" && log "wrote ${N#$R}"
+	else
+		rm "$N.new"
+	fi
+fi
+
+if [ ! -e "$R/etc/resolv.conf" ] && [ ! -L "$R/etc/resolv.conf" ]; then
+	ln -s /run/systemd/resolve/stub-resolv.conf "$R/etc/resolv.conf" &&
+		log "linked /etc/resolv.conf to systemd-resolved"
+fi
+
+# All modules live in the standard tree (tools/stage-modules.sh); remove stray
+# copies that early images put under /lib/modules/*/extra.
+for f in "$R"/lib/modules/*/extra/nt36xxx_spi.ko "$R"/lib/modules/*/extra/ufs-qcom.ko \
+	 "$R"/lib/modules/*/extra/phy-qcom-qmp-ufs.ko \
+	 "$R"/usr/local/lib/nairo-modules/ufs-qcom.ko \
+	 "$R"/usr/local/lib/nairo-modules/phy-qcom-qmp-ufs.ko; do
+	[ -e "$f" ] && rm -f "$f" && log "removed ${f#$R}"
+done
+# Module tree and headers for this kernel ship in the boot image (/payload):
+# install them whenever the image's stamp differs from the installed one, so
+# a freshly flashed kernel never runs with mismatched modules.
+P=/payload
+if [ -f "$P/stamp" ]; then
+	V=$(cut -d' ' -f1 "$P/stamp")
+	S=$R/usr/lib/modules/$V/.nairo-payload
+	if ! cmp -s "$P/stamp" "$S"; then
+		log "installing modules and headers for $V ($(cut -d' ' -f2- "$P/stamp"))"
+		rm -rf "$R/usr/lib/modules/$V"
+		tar -C "$R" -xzf "$P/modules.tar.gz" && tar -C "$R" -xzf "$P/headers.tar.gz" &&
+			cp "$P/stamp" "$S" && sync && log "installed /usr/lib/modules/$V" ||
+			log "installing /usr/lib/modules/$V FAILED"
+	fi
+fi
+mkdir -p "$R/lib/firmware/novatek"
+for f in /lib/firmware/novatek/*; do
+	[ -e "$f" ] || continue
+	cmp -s "$f" "$R/lib/firmware/novatek/${f##*/}" ||
+		{ cp "$f" "$R/lib/firmware/novatek/" && log "installed firmware ${f##*/}"; }
+done
+# The touch driver is loaded from the initramfs, before switch_root; keep udev
+# from loading it a second time, and from loading it at all with nairo.notouch
+B=$R/etc/modprobe.d/nairo-touch.conf
+BL="blacklist nt36xxx_spi"
+if [ "$(cat "$B" 2>/dev/null)" != "$BL" ]; then
+	mkdir -p "${B%/*}" && echo "$BL" > "$B" && log "wrote ${B#$R}"
+fi
+# Remove the
+# boot-time loader unit that K27/K28 installed, wherever it was enabled.
+for L in "$R"/etc/systemd/system/*.wants/nairo-modules.service \
+	 "$R/etc/systemd/system/nairo-modules.service"; do
+	[ -e "$L" ] || [ -L "$L" ] || continue
+	rm -f "$L" && log "removed ${L#$R}"
+done
+
+# GPU driver: msm is in the standard module tree, so udev may load it on its
+# own; this unit only guarantees it is loaded before the display manager, so
+# KWin finds the Adreno. Emergency switch: "module_blacklist=msm" on the cmdline.
+# Both files are owned by this script while they keep their header line.
+own() {	# own <file> <header>: write stdin to <file> unless the user took it over
+	if [ ! -e "$1" ] || [ "$(head -n 1 "$1")" = "$2" ]; then
+		mkdir -p "${1%/*}"
+		{ echo "$2"; cat; } > "$1.new"
+		if ! cmp -s "$1.new" "$1"; then
+			mv "$1.new" "$1" && log "wrote ${1#$R}"
+		else
+			rm "$1.new"
+		fi
+	else
+		cat > /dev/null
+	fi
+}
+own "$R/etc/modprobe.d/nairo-msm.conf" "# msm GPU driver options (nairo initramfs)" <<CONF
+# no DPU/DSI display driver yet: bring up the GPU on its own
+options msm separate_gpu_kms=1
+CONF
+own "$R/etc/systemd/system/nairo-msm.service" "# Load the msm GPU driver before the display manager (nairo initramfs)" <<UNIT
+[Unit]
+Description=Load the msm GPU driver (nairo)
+Before=display-manager.service
+ConditionPathIsDirectory=/usr/lib/modules/%v/kernel/drivers/gpu/drm/msm
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/modprobe msm
+
+[Install]
+WantedBy=graphical.target
+UNIT
+W=$R/etc/systemd/system/graphical.target.wants
+if [ ! -L "$W/nairo-msm.service" ]; then
+	mkdir -p "$W" && ln -s /etc/systemd/system/nairo-msm.service "$W/" &&
+		log "enabled nairo-msm.service"
+fi
+
+enable() {	# enable <target.wants> <unit file> [instance name]
+	W=$R/etc/systemd/system/$1
+	L=$W/${3:-$2}
+	[ -e "$L" ] || [ -L "$L" ] && return
+	mkdir -p "$W" && ln -s "/usr/lib/systemd/system/$2" "$L" && log "enabled ${3:-$2}"
+}
+enable multi-user.target.wants systemd-networkd.service
+enable multi-user.target.wants sshd.service
+enable sysinit.target.wants systemd-resolved.service
+enable sysinit.target.wants systemd-timesyncd.service
+enable getty.target.wants serial-getty@.service serial-getty@ttyGS0.service
+
+# Modem + Wi-Fi at boot (approved 2026-10-06). rmtfs serves the modem's EFS
+# from file copies in /var/lib/rmtfs, read-only (-r: modem writes stay in
+# RAM), never the real modemst/fsc/fsg partitions. tqftpserv serves the WLAN
+# firmware, the in-kernel PD mapper the modem's protection domains.
+own "$R/etc/systemd/system/rmtfs.service.d/nairo.conf" "# nairo: file-backed, read-only EFS (nairo initramfs)" <<UNIT
+[Unit]
+Wants=tqftpserv.service
+After=tqftpserv.service systemd-modules-load.service
+ConditionPathExists=/var/lib/rmtfs/modem_fs1
+ConditionPathExists=/var/lib/rmtfs/modem_fs2
+
+[Service]
+# a modem restart needs fresh QRTR services, or it stalls in initialisation
+ExecStartPre=-/usr/bin/systemctl restart tqftpserv.service
+ExecStartPre=-/usr/bin/modprobe -r qcom_pd_mapper
+ExecStartPre=/usr/bin/modprobe qcom_pd_mapper
+ExecStart=
+ExecStart=/usr/bin/rmtfs -o /var/lib/rmtfs -r -s
+UNIT
+# ipa must be up before rmtfs starts the modem (rmtfs runs after
+# systemd-modules-load): the modem's IPA startup needs the AP driver
+own "$R/etc/modules-load.d/nairo-modem.conf" "# nairo: modem protection domain mapper (nairo initramfs)" <<CONF
+qcom_pd_mapper
+ipa
+CONF
+for u in rmtfs.service tqftpserv.service; do
+	[ -e "$R/usr/lib/systemd/system/$u" ] && enable multi-user.target.wants $u
+done
+
+# usb0 is systemd-networkd's (SSH lifeline); NetworkManager handles the rest
+own "$R/etc/NetworkManager/conf.d/90-nairo-usb0.conf" "# usb0 belongs to systemd-networkd (nairo initramfs)" <<CONF
+[keyfile]
+unmanaged-devices=interface-name:usb0
+CONF
+
+# Wi-Fi MAC: the bootloader passes it as wifimacaddr=<wlan>,<p2p>; without it
+# ath10k picks a random one at every boot
+M=$(sed -n 's/.*wifimacaddr=\([0-9A-Fa-f:]\{17\}\).*/\1/p' /proc/cmdline | tr A-F a-f)
+if [ -n "$M" ]; then
+	own "$R/etc/systemd/network/10-nairo-wlan.link" "# Wi-Fi MAC from the bootloader (nairo initramfs)" <<LINK
+[Match]
+Driver=ath10k_snoc
+
+[Link]
+MACAddress=$M
+NamePolicy=kernel
+LINK
+fi
