@@ -237,19 +237,22 @@ W=$R/etc/systemd/system/timers.target.wants
 	ln -s /etc/systemd/system/nairo-slot-success.timer "$W/nairo-slot-success.timer" &&
 	log "enabled nairo-slot-success.timer"; }
 
-# Modem: restart it early when its first start stalls (see the script)
+# Modem: restart it early when its first start stalls, then set it online and
+# open the SIM session before ModemManager looks at it (see the script)
 if ! cmp -s /etc/nairo-modem-check "$R/usr/local/bin/nairo-modem-check"; then
 	mkdir -p "$R/usr/local/bin" && cp /etc/nairo-modem-check "$R/usr/local/bin/nairo-modem-check" &&
 		chmod 755 "$R/usr/local/bin/nairo-modem-check" && log "installed nairo-modem-check"
 fi
 own "$R/etc/systemd/system/nairo-modem-check.service" "# nairo: restart the modem early if its first start stalls (nairo initramfs)" <<UNIT
 [Unit]
-Description=Restart the modem early if its first start stalls (nairo)
+Description=Restart the modem early if its first start stalls, bring it online (nairo)
 After=rmtfs.service
 Wants=rmtfs.service
+Before=ModemManager.service
 
 [Service]
-Type=exec
+Type=oneshot
+TimeoutStartSec=3min
 ExecStart=/usr/local/bin/nairo-modem-check
 
 [Install]
