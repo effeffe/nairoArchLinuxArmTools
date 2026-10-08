@@ -1,0 +1,53 @@
+From 5a3536552981cddfe7b9091c156f4137b78f6ab9 Mon Sep 17 00:00:00 2001
+From: nairo <none@none>
+Date: Thu, 8 Oct 2026 08:42:03 +0100
+Subject: [PATCH] translate: serve /readonly/vendor/fsg/ from the modem
+ firmware dir
+
+The SM7250 (Motorola nairo) modem reads its modem configs (MCFG) from
+the FSG partition, mounted at /vendor/fsg on Android:
+/readonly/vendor/fsg/mcfg_sw/mbn_sw.dig, and the mbn files it lists.
+Map /readonly/vendor/fsg/<file> to fsg/<file> next to the remoteproc
+firmware, like the other readonly paths.
+
+This patch was written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+---
+ translate.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/translate.c b/translate.c
+index 409ff95..7ccd54e 100644
+--- a/translate.c
++++ b/translate.c
+@@ -25,6 +25,8 @@
+ #define READONLY_MODEM_PATH	READONLY_FW_BASE "modem_pr"
+ #define READONLY_VENDOR_PATH		"/readonly/vendor/firmware/"
+ #define READONLY_VENDOR_MNT_PATH	"/readonly/vendor/firmware_mnt/image/"
++#define READONLY_VENDOR_FSG_PATH	"/readonly/vendor/fsg/"
++#define READONLY_VENDOR_BASE		"/readonly/vendor/"
+ 
+ #ifndef ANDROID
+ #define FIRMWARE_BASE	"/lib/firmware/"
+@@ -214,6 +216,8 @@ static int translate_readwrite(const char *file, int flags)
+  * using the modem_pr relative path (e.g., maps to READONLY_FW_BASE/<fw_dir>/modem_pr/...).
+  * Strips /readonly/vendor/firmware/ and /readonly/vendor/firmware_mnt/image/
+  * and searches among remoteproc firmware.
++ * Strips /readonly/vendor/ from /readonly/vendor/fsg/ and searches for fsg/...
++ * among remoteproc firmware, for the modem configs (MCFG) of the FSG partition.
+  * Replaces /readwrite/ with a persistent directory.
+  */
+ int translate_open(const char *path, int flags)
+@@ -228,6 +232,8 @@ int translate_open(const char *path, int flags)
+ 		return translate_readonly(path + strlen(READONLY_VENDOR_MNT_PATH));
+ 	else if (!strncmp(path, READONLY_VENDOR_PATH, strlen(READONLY_VENDOR_PATH)))
+ 		return translate_readonly(path + strlen(READONLY_VENDOR_PATH));
++	else if (!strncmp(path, READONLY_VENDOR_FSG_PATH, strlen(READONLY_VENDOR_FSG_PATH)))
++		return translate_readonly(path + strlen(READONLY_VENDOR_BASE));
+ 
+ 	fprintf(stderr, "invalid path %s, rejecting\n", path);
+ 	errno = ENOENT;
+-- 
+2.56.0
+
