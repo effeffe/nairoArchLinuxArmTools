@@ -8,9 +8,12 @@ export ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
 export LOCALVERSION=
 
 make -s -C linux O=../build -j"$(nproc)" Image qcom/${DTB:=sm7250-motorola-nairo}.dtb \
-	drivers/input/touchscreen/nt36xxx-spi/nt36xxx_spi.ko
+	drivers/input/touchscreen/nt36xxx-spi/nt36xxx_spi.ko \
+	drivers/power/supply/qcom_smbx.ko drivers/power/supply/qcom_qg.ko
 mkdir -p initramfs/modules initramfs/firmware/novatek
-for m in drivers/input/touchscreen/nt36xxx-spi/nt36xxx_spi.ko; do
+# touch for the system; charger + fuel gauge for the off-mode charging screen
+for m in drivers/input/touchscreen/nt36xxx-spi/nt36xxx_spi.ko \
+	drivers/power/supply/qcom_smbx.ko drivers/power/supply/qcom_qg.ko; do
 	aarch64-linux-gnu-strip --strip-debug -o initramfs/modules/${m##*/} build/$m
 done
 
@@ -27,7 +30,7 @@ echo "$V #$(cat build/.version) $(cat initramfs/payload/modules.tar.gz initramfs
 
 # proprietary touch firmware, extracted from the LineageOS vendor partition
 cp vendor_firmware/firmware/novatek_ts_fw.bin initramfs/firmware/novatek/nt36672c-tianma.bin
-aarch64-linux-gnu-gcc -static -Os -Wall -o initramfs/root/init initramfs/init.c
+aarch64-linux-gnu-gcc -static -Os -Wall -o initramfs/root/init initramfs/init.c initramfs/charger.c
 aarch64-linux-gnu-strip initramfs/root/init
 tools/gen_init_cpio initramfs/initramfs.list | gzip -9 > initramfs/initramfs.cpio.gz
 

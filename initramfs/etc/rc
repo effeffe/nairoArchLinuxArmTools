@@ -3,6 +3,8 @@
 # All output goes to the kernel log, so it reaches the fbcon and pstore.
 # "rc gadget": only set up and bind the gadget (init then switches to the real
 # root, whose systemd-networkd/sshd take over usb0).
+# "rc charger": off-mode charging; init owns the screen, so no console mirror
+# and no touch driver.
 exec >/dev/kmsg 2>&1
 export PATH=/sbin:/usr/sbin:/bin:/usr/bin
 log() { echo "nairo-rc: $*"; }
@@ -14,7 +16,8 @@ mount -t configfs configfs /sys/kernel/config
 mkdir -p /dev/pts && mount -t devpts devpts /dev/pts
 
 # the bootloader forces console=null: mirror the kernel log onto the fbcon
-(cat /dev/kmsg | sed -e '/^ /d' -e 's/^[^;]*;//' > /dev/tty0 2>&1) &
+[ "$1" = charger ] ||
+	(cat /dev/kmsg | sed -e '/^ /d' -e 's/^[^;]*;//' > /dev/tty0 2>&1) &
 
 i=0
 while [ -z "$(ls /sys/class/udc 2>/dev/null)" ]; do
@@ -63,7 +66,9 @@ cd /
 # Touch (NT36672C): load before switch_root, while its firmware is readable
 # from the initramfs. Proven stable when loaded by hand; "nairo.notouch" on
 # the kernel command line skips it.
-if grep -qw nairo.notouch /proc/cmdline; then
+if [ "$1" = charger ]; then
+	:
+elif grep -qw nairo.notouch /proc/cmdline; then
 	log "nairo.notouch: touch driver not loaded"
 elif ! grep -q "^nt36xxx_spi " /proc/modules; then
 	insmod /lib/modules/nt36xxx_spi.ko && log "touch driver loaded" ||

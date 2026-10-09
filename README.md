@@ -20,6 +20,7 @@ provides the files marked (repo):
 build-nairo.sh             (repo) builds kernel + DTB + initramfs, packs the boot image
 tools/                     (repo) staging and helper scripts
 initramfs/init.c           (repo) the initramfs init (static C)
+initramfs/charger.c        (repo) off-mode charging screen, linked into init
 initramfs/initramfs.list   (repo) gen_init_cpio list
 initramfs/etc/             (repo) rc, arch-prep, passwd, ... (add authorized_keys)
 initramfs/third-party/     (repo) busybox .config, dropbear localoptions.h

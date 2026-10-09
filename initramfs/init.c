@@ -16,6 +16,10 @@
  *                    DEV is a device path or PARTLABEL=<GPT partition name>
  *   nairo.reboot=N   seconds before rebooting (default 60, 0 = never)
  *   nairo.off=10     power off as soon as init runs (boot-stage probe)
+ *
+ * androidboot.mode=charger (set by the bootloader when the phone was off and
+ * a charger is plugged in) runs the charging screen in charger.c instead,
+ * without mounting any root filesystem.
  */
 #include <fcntl.h>
 #include <signal.h>
@@ -32,7 +36,7 @@
 
 static int kmsg = -1;
 
-static void say(const char *msg)
+void say(const char *msg)
 {
 	char buf[256];
 	int n = snprintf(buf, sizeof(buf), "<1>nairo-init: %s\n", msg);
@@ -49,6 +53,8 @@ static void on_signal(int sig)
 }
 
 static char cmdline[4096];
+
+void charger_main(void);
 
 static int cmdline_int(const char *key, int def)
 {
@@ -202,6 +208,15 @@ int main(void)
 	if (cmdline_int("nairo.off=", 0) == 10) {
 		sync();
 		reboot(RB_POWER_OFF);
+	}
+
+	/* off-mode charging: USB gadget and SSH for debugging, then the screen */
+	if (strstr(cmdline, "androidboot.mode=charger")) {
+		if (fork() == 0) {
+			execl("/bin/sh", "sh", "/etc/rc", "charger", (char *)NULL);
+			_exit(127);
+		}
+		charger_main();
 	}
 
 	try_switch_root();
