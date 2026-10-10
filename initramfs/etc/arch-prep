@@ -107,8 +107,7 @@ own() {	# own <file> <header>: write stdin to <file> unless the user took it ove
 	fi
 }
 own "$R/etc/modprobe.d/nairo-msm.conf" "# msm GPU driver options (nairo initramfs)" <<CONF
-# no DPU/DSI display driver yet: bring up the GPU on its own
-options msm separate_gpu_kms=1
+# The display (DPU/DSI) and the GPU share one DRM device: no options.
 CONF
 own "$R/etc/systemd/system/nairo-msm.service" "# Load the msm GPU driver before the display manager (nairo initramfs)" <<UNIT
 [Unit]

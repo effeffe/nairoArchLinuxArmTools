@@ -1,8 +1,8 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:19 +0100
-Subject: [PATCH 19/87] Input: touchscreen: Import Novatek NT36xxx no-flash SPI
- driver
+Subject: [PATCH 019/102] Input: touchscreen: Import Novatek NT36xxx no-flash
+ SPI driver
 
 Import the vendor Novatek NT36xxx "no flash" SPI touchscreen driver
 unchanged, as carried by the sm8150-mainline project for the Xiaomi Pad 5:

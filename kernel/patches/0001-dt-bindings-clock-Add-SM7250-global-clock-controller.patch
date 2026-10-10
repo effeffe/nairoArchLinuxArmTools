@@ -1,7 +1,8 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:38 +0000
-Subject: [PATCH 01/87] dt-bindings: clock: Add SM7250 global clock controller
+Subject: [PATCH 001/102] dt-bindings: clock: Add SM7250 global clock
+ controller
 
 Add device tree bindings for global clock controller on SM7250 SoC.
 

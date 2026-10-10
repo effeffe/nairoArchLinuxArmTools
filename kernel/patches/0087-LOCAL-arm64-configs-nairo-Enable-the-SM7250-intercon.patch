@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 22:47:30 +0100
-Subject: [PATCH 87/87] LOCAL: arm64: configs: nairo: Enable the SM7250
+Subject: [PATCH 087/102] LOCAL: arm64: configs: nairo: Enable the SM7250
  interconnect driver
 
 These changes were written with the help of an LLM and checked by a human.

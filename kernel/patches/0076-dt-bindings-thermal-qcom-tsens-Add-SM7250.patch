@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 21:08:53 +0100
-Subject: [PATCH 76/87] dt-bindings: thermal: qcom-tsens: Add SM7250
+Subject: [PATCH 076/102] dt-bindings: thermal: qcom-tsens: Add SM7250
 
 SM7250 has two TSENS v2 controllers laid out like the SM8250 ones.
 

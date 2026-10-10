@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:21 +0100
-Subject: [PATCH 29/87] dt-bindings: arm: qcom: Add Motorola Moto G 5G Plus
+Subject: [PATCH 029/102] dt-bindings: arm: qcom: Add Motorola Moto G 5G Plus
 
 Document the Motorola Moto G 5G Plus (nairo), an SM7250 phone.
 

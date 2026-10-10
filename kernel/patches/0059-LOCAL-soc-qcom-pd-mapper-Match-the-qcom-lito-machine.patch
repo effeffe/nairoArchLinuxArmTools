@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Tue, 6 Oct 2026 23:05:46 +0100
-Subject: [PATCH 59/87] LOCAL: soc: qcom: pd-mapper: Match the "qcom,lito"
+Subject: [PATCH 059/102] LOCAL: soc: qcom: pd-mapper: Match the "qcom,lito"
  machine compatible
 
 The nairo bootloader applies the stock dtbo, which replaces the root

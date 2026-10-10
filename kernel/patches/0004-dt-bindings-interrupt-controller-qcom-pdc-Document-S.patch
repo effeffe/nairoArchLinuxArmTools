@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:45 +0000
-Subject: [PATCH 04/87] dt-bindings: interrupt-controller: qcom,pdc: Document
+Subject: [PATCH 004/102] dt-bindings: interrupt-controller: qcom,pdc: Document
  SM7250 PDC
 
 Document the PDC block on the SM7250 SoC.

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:15 +0100
-Subject: [PATCH 07/87] dt-bindings: pinctrl: qcom: Add SM7250 TLMM
+Subject: [PATCH 007/102] dt-bindings: pinctrl: qcom: Add SM7250 TLMM
 
 Document the Top Level Mode Multiplexer of the SM7250 (lito) SoC: three
 tiles (south, west, east), 146 GPIOs plus ufs_reset (exposed as GPIO 146,

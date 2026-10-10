@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 16:50:51 +0100
-Subject: [PATCH 69/87] arm64: dts: qcom: sm7250-motorola-nairo: Enable IPA
+Subject: [PATCH 069/102] arm64: dts: qcom: sm7250-motorola-nairo: Enable IPA
 
 The modem firmware waits for the AP's IPA driver during its startup.
 The GSI firmware is loaded by the AP from the vendor ipa_fws image.

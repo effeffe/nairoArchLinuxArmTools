@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:16 +0100
-Subject: [PATCH 09/87] dt-bindings: iommu: arm,smmu: Add SM7250 SMMU
+Subject: [PATCH 009/102] dt-bindings: iommu: arm,smmu: Add SM7250 SMMU
 
 Add the qcom,sm7250-smmu-500 compatible for the SM7250 apps SMMU (MMU-500
 with the Qualcomm implementation, no clocks).
