@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Tue, 6 Oct 2026 23:05:45 +0100
-Subject: [PATCH 57/80] remoteproc: qcom_q6v5_pas: Add SM7250 MPSS
+Subject: [PATCH 57/87] remoteproc: qcom_q6v5_pas: Add SM7250 MPSS
 
 The downstream SM7250 modem node matches mpss_resource_init: PAS ID 4,
 crash reason SMEM item 421, minidump ID 3, SSCTL instance 0x12 and CX

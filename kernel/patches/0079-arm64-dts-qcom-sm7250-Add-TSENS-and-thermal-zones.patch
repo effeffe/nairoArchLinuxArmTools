@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 21:08:54 +0100
-Subject: [PATCH 79/80] arm64: dts: qcom: sm7250: Add TSENS and thermal zones
+Subject: [PATCH 79/87] arm64: dts: qcom: sm7250: Add TSENS and thermal zones
 
 Add the two TSENS controllers (same addresses and PDC interrupts as on
 SM8250) and a thermal zone for every sensor the downstream device tree

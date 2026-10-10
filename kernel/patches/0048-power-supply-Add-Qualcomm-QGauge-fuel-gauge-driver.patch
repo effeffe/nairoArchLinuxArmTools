@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:12 +0100
-Subject: [PATCH 48/80] power: supply: Add Qualcomm QGauge fuel gauge driver
+Subject: [PATCH 48/87] power: supply: Add Qualcomm QGauge fuel gauge driver
 
 Add a read-only driver for the QGauge (QG) block of the PM7250B PMIC. QG
 only measures battery voltage and current; the driver relies on the

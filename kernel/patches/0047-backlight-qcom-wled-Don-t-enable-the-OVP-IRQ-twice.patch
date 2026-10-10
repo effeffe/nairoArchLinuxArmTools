@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:11 +0100
-Subject: [PATCH 47/80] backlight: qcom-wled: Don't enable the OVP IRQ twice
+Subject: [PATCH 47/87] backlight: qcom-wled: Don't enable the OVP IRQ twice
 
 When the bootloader leaves the module enabled, wled_configure_ovp_irq()
 keeps the OVP interrupt enabled but wled->brightness stays 0, so the

@@ -1,0 +1,406 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sat, 10 Oct 2026 22:47:30 +0100
+Subject: [PATCH 84/87] arm64: dts: qcom: sm7250: Add interconnect consumers
+
+Once the interconnect providers take over, every path needs a vote:
+- CPUs: per-cluster OPP tables matching the cpufreq-hw LUT, with the
+  DDR bandwidth of the downstream LLCC to DDR memlat tables;
+- GPU: the gfx-mem path, with the downstream default bus level of
+  each power level;
+- UFS, USB, SDHC2, IPA and QUP wrapper 1 with its serial engines, with
+  the same paths as SM8250.
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ arch/arm64/boot/dts/qcom/sm7250.dtsi | 216 ++++++++++++++++++++++++++-
+ 1 file changed, 215 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm7250.dtsi b/arch/arm64/boot/dts/qcom/sm7250.dtsi
+index 91c120e42..f2dbd1e35 100644
+--- a/arch/arm64/boot/dts/qcom/sm7250.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm7250.dtsi
+@@ -6,6 +6,7 @@
+ #include <dt-bindings/clock/qcom,gpucc-sm8250.h>
+ #include <dt-bindings/clock/qcom,rpmh.h>
+ #include <dt-bindings/clock/qcom,sm7250-gcc.h>
++#include <dt-bindings/interconnect/qcom,icc.h>
+ #include <dt-bindings/interconnect/qcom,sm7250-rpmh.h>
+ #include <dt-bindings/interrupt-controller/arm-gic.h>
+ #include <dt-bindings/mailbox/qcom-ipcc.h>
+@@ -47,6 +48,9 @@ cpu0: cpu@0 {
+ 			dynamic-power-coefficient = <100>;
+ 			next-level-cache = <&l2_0>;
+ 			qcom,freq-domain = <&cpufreq_hw 0>;
++			operating-points-v2 = <&cpu0_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd0>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -77,6 +81,9 @@ cpu1: cpu@100 {
+ 			dynamic-power-coefficient = <100>;
+ 			next-level-cache = <&l2_100>;
+ 			qcom,freq-domain = <&cpufreq_hw 0>;
++			operating-points-v2 = <&cpu0_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd1>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -100,6 +107,9 @@ cpu2: cpu@200 {
+ 			dynamic-power-coefficient = <100>;
+ 			next-level-cache = <&l2_200>;
+ 			qcom,freq-domain = <&cpufreq_hw 0>;
++			operating-points-v2 = <&cpu0_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd2>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -123,6 +133,9 @@ cpu3: cpu@300 {
+ 			dynamic-power-coefficient = <100>;
+ 			next-level-cache = <&l2_300>;
+ 			qcom,freq-domain = <&cpufreq_hw 0>;
++			operating-points-v2 = <&cpu0_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd3>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -146,6 +159,9 @@ cpu4: cpu@400 {
+ 			dynamic-power-coefficient = <100>;
+ 			next-level-cache = <&l2_400>;
+ 			qcom,freq-domain = <&cpufreq_hw 0>;
++			operating-points-v2 = <&cpu0_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd4>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -169,6 +185,9 @@ cpu5: cpu@500 {
+ 			dynamic-power-coefficient = <100>;
+ 			next-level-cache = <&l2_500>;
+ 			qcom,freq-domain = <&cpufreq_hw 0>;
++			operating-points-v2 = <&cpu0_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd5>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -192,6 +211,9 @@ cpu6: cpu@600 {
+ 			dynamic-power-coefficient = <341>;
+ 			next-level-cache = <&l2_600>;
+ 			qcom,freq-domain = <&cpufreq_hw 1>;
++			operating-points-v2 = <&cpu6_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd6>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -215,6 +237,9 @@ cpu7: cpu@700 {
+ 			dynamic-power-coefficient = <375>;
+ 			next-level-cache = <&l2_700>;
+ 			qcom,freq-domain = <&cpufreq_hw 2>;
++			operating-points-v2 = <&cpu7_opp_table>;
++			interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+ 			power-domains = <&cpu_pd7>;
+ 			power-domain-names = "psci";
+ 			#cooling-cells = <2>;
+@@ -348,6 +373,145 @@ memory@80000000 {
+ 		reg = <0x0 0x80000000 0x0 0x0>;
+ 	};
+ 
++	/*
++	 * DDR bandwidth for each CPU frequency, from the downstream memlat tables
++	 * (LLCC to DDR, converted from MiB/s).
++	 */
++	cpu0_opp_table: opp-table-cpu0 {
++		compatible = "operating-points-v2";
++		opp-shared;
++
++		opp-300000000 {
++			opp-hz = /bits/ 64 <300000000>;
++			opp-peak-kBps = <1200000>;
++		};
++
++		opp-576000000 {
++			opp-hz = /bits/ 64 <576000000>;
++			opp-peak-kBps = <1200000>;
++		};
++
++		opp-614400000 {
++			opp-hz = /bits/ 64 <614400000>;
++			opp-peak-kBps = <1200000>;
++		};
++
++		opp-864000000 {
++			opp-hz = /bits/ 64 <864000000>;
++			opp-peak-kBps = <1804000>;
++		};
++
++		opp-902400000 {
++			opp-hz = /bits/ 64 <902400000>;
++			opp-peak-kBps = <1804000>;
++		};
++
++		opp-1363200000 {
++			opp-hz = /bits/ 64 <1363200000>;
++			opp-peak-kBps = <3072000>;
++		};
++
++		opp-1516800000 {
++			opp-hz = /bits/ 64 <1516800000>;
++			opp-peak-kBps = <4068000>;
++		};
++
++		opp-1651200000 {
++			opp-hz = /bits/ 64 <1651200000>;
++			opp-peak-kBps = <4068000>;
++		};
++
++		opp-1804800000 {
++			opp-hz = /bits/ 64 <1804800000>;
++			opp-peak-kBps = <4068000>;
++		};
++	};
++
++	cpu6_opp_table: opp-table-cpu6 {
++		compatible = "operating-points-v2";
++		opp-shared;
++
++		opp-652800000 {
++			opp-hz = /bits/ 64 <652800000>;
++			opp-peak-kBps = <1804000>;
++		};
++
++		opp-940800000 {
++			opp-hz = /bits/ 64 <940800000>;
++			opp-peak-kBps = <2188000>;
++		};
++
++		opp-1094400000 {
++			opp-hz = /bits/ 64 <1094400000>;
++			opp-peak-kBps = <4068000>;
++		};
++
++		opp-1478400000 {
++			opp-hz = /bits/ 64 <1478400000>;
++			opp-peak-kBps = <6220000>;
++		};
++
++		opp-1728000000 {
++			opp-hz = /bits/ 64 <1728000000>;
++			opp-peak-kBps = <7216000>;
++		};
++
++		opp-1900800000 {
++			opp-hz = /bits/ 64 <1900800000>;
++			opp-peak-kBps = <7216000>;
++		};
++
++		opp-2092800000 {
++			opp-hz = /bits/ 64 <2092800000>;
++			opp-peak-kBps = <7216000>;
++		};
++
++		opp-2208000000 {
++			opp-hz = /bits/ 64 <2208000000>;
++			opp-peak-kBps = <7216000>;
++		};
++	};
++
++	cpu7_opp_table: opp-table-cpu7 {
++		compatible = "operating-points-v2";
++		opp-shared;
++
++		opp-806400000 {
++			opp-hz = /bits/ 64 <806400000>;
++			opp-peak-kBps = <2188000>;
++		};
++
++		opp-1094400000 {
++			opp-hz = /bits/ 64 <1094400000>;
++			opp-peak-kBps = <4068000>;
++		};
++
++		opp-1401600000 {
++			opp-hz = /bits/ 64 <1401600000>;
++			opp-peak-kBps = <6220000>;
++		};
++
++		opp-1766400000 {
++			opp-hz = /bits/ 64 <1766400000>;
++			opp-peak-kBps = <7216000>;
++		};
++
++		opp-1996800000 {
++			opp-hz = /bits/ 64 <1996800000>;
++			opp-peak-kBps = <7216000>;
++		};
++
++		opp-2188800000 {
++			opp-hz = /bits/ 64 <2188800000>;
++			opp-peak-kBps = <7216000>;
++		};
++
++		opp-2304000000 {
++			opp-hz = /bits/ 64 <2304000000>;
++			opp-peak-kBps = <7216000>;
++		};
++	};
++
+ 	pmu {
+ 		compatible = "arm,armv8-pmuv3";
+ 		interrupts = <GIC_PPI 5 IRQ_TYPE_LEVEL_HIGH>;
+@@ -606,6 +770,9 @@ qupv3_id_1: geniqup@9c0000 {
+ 			clocks = <&gcc GCC_QUPV3_WRAP_1_M_AHB_CLK>,
+ 				 <&gcc GCC_QUPV3_WRAP_1_S_AHB_CLK>;
+ 			iommus = <&apps_smmu 0x23 0x0>;
++			interconnects = <&qup_virt MASTER_QUP_CORE_1 QCOM_ICC_TAG_ALWAYS
++					 &qup_virt SLAVE_QUP_CORE_1 QCOM_ICC_TAG_ALWAYS>;
++			interconnect-names = "qup-core";
+ 			#address-cells = <2>;
+ 			#size-cells = <2>;
+ 			ranges;
+@@ -616,6 +783,13 @@ spi7: spi@984000 {
+ 				clock-names = "se";
+ 				clocks = <&gcc GCC_QUPV3_WRAP1_S1_CLK>;
+ 				interrupts = <GIC_SPI 354 IRQ_TYPE_LEVEL_HIGH>;
++				interconnects = <&qup_virt MASTER_QUP_CORE_1 QCOM_ICC_TAG_ALWAYS
++						 &qup_virt SLAVE_QUP_CORE_1 QCOM_ICC_TAG_ALWAYS>,
++						<&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++						 &config_noc SLAVE_QUP_1 QCOM_ICC_TAG_ACTIVE_ONLY>,
++						<&aggre1_noc MASTER_QUP_1 QCOM_ICC_TAG_ALWAYS
++						 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>;
++				interconnect-names = "qup-core", "qup-config", "qup-memory";
+ 				pinctrl-0 = <&qup_spi7_default>;
+ 				pinctrl-names = "default";
+ 				#address-cells = <1>;
+@@ -629,6 +803,11 @@ uart2: serial@988000 {
+ 				clock-names = "se";
+ 				clocks = <&gcc GCC_QUPV3_WRAP1_S2_CLK>;
+ 				interrupts = <GIC_SPI 355 IRQ_TYPE_LEVEL_HIGH>;
++				interconnects = <&qup_virt MASTER_QUP_CORE_1 QCOM_ICC_TAG_ALWAYS
++						 &qup_virt SLAVE_QUP_CORE_1 QCOM_ICC_TAG_ALWAYS>,
++						<&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++						 &config_noc SLAVE_QUP_1 QCOM_ICC_TAG_ACTIVE_ONLY>;
++				interconnect-names = "qup-core", "qup-config";
+ 				status = "disabled";
+ 			};
+ 		};
+@@ -703,6 +882,12 @@ ufs_mem_hc: ufshc@1d84000 {
+ 
+ 			power-domains = <&gcc UFS_PHY_GDSC>;
+ 
++			interconnects = <&aggre1_noc MASTER_UFS_MEM QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++					<&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &config_noc SLAVE_UFS_MEM_CFG QCOM_ICC_TAG_ACTIVE_ONLY>;
++			interconnect-names = "ufs-ddr", "cpu-ufs";
++
+ 			clocks = <&gcc GCC_UFS_PHY_AXI_CLK>,
+ 				 <&gcc GCC_AGGRE_UFS_PHY_AXI_CLK>,
+ 				 <&gcc GCC_UFS_PHY_AHB_CLK>,
+@@ -798,6 +983,14 @@ ipa: ipa@1e40000 {
+ 			clocks = <&rpmhcc RPMH_IPA_CLK>;
+ 			clock-names = "core";
+ 
++			interconnects = <&aggre2_noc MASTER_IPA QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++					<&aggre2_noc MASTER_IPA QCOM_ICC_TAG_ALWAYS
++					 &system_noc SLAVE_OCIMEM QCOM_ICC_TAG_ALWAYS>,
++					<&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &config_noc SLAVE_IPA_CFG QCOM_ICC_TAG_ACTIVE_ONLY>;
++			interconnect-names = "memory", "imem", "config";
++
+ 			qcom,smem-states = <&ipa_smp2p_out 0>,
+ 					   <&ipa_smp2p_out 1>;
+ 			qcom,smem-state-names = "ipa-clock-enabled-valid",
+@@ -827,6 +1020,10 @@ gpu: gpu@3d00000 {
+ 
+ 			qcom,gmu = <&gmu>;
+ 
++			interconnects = <&gem_noc MASTER_GRAPHICS_3D QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>;
++			interconnect-names = "gfx-mem";
++
+ 			#cooling-cells = <2>;
+ 
+ 			status = "disabled";
+@@ -838,7 +1035,8 @@ gpu_zap_shader: zap-shader {
+ 			/*
+ 			 * From the downstream power levels. Speed bins 0x00 and 0x84
+ 			 * (supported-hw bits 0 and 1) run up to 625 MHz, speed bin 0x73
+-			 * (bit 2) up to 540 MHz.
++			 * (bit 2) up to 540 MHz. The DDR votes are the downstream default
++			 * bus level of each power level.
+ 			 */
+ 			gpu_opp_table: opp-table {
+ 				compatible = "operating-points-v2";
+@@ -846,30 +1044,35 @@ gpu_opp_table: opp-table {
+ 				opp-625000000 {
+ 					opp-hz = /bits/ 64 <625000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
++					opp-peak-kBps = <6220000>;
+ 					opp-supported-hw = <0x3>;
+ 				};
+ 
+ 				opp-540000000 {
+ 					opp-hz = /bits/ 64 <540000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
++					opp-peak-kBps = <4068000>;
+ 					opp-supported-hw = <0x4>;
+ 				};
+ 
+ 				opp-500000000 {
+ 					opp-hz = /bits/ 64 <500000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
++					opp-peak-kBps = <4068000>;
+ 					opp-supported-hw = <0x3>;
+ 				};
+ 
+ 				opp-400000000 {
+ 					opp-hz = /bits/ 64 <400000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
++					opp-peak-kBps = <3072000>;
+ 					opp-supported-hw = <0x7>;
+ 				};
+ 
+ 				opp-275000000 {
+ 					opp-hz = /bits/ 64 <275000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS>;
++					opp-peak-kBps = <2188000>;
+ 					opp-supported-hw = <0x7>;
+ 				};
+ 			};
+@@ -1014,6 +1217,11 @@ sdhc_2: mmc@8804000 {
+ 			sdhci-caps-mask = <0x0 0x18000000>;
+ 
+ 			power-domains = <&rpmhpd RPMHPD_CX>;
++			interconnects = <&aggre1_noc MASTER_SDCC_2 QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++					<&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &config_noc SLAVE_SDCC_2 QCOM_ICC_TAG_ACTIVE_ONLY>;
++			interconnect-names = "sdhc-ddr", "cpu-sdhc";
+ 			operating-points-v2 = <&sdhc2_opp_table>;
+ 
+ 			bus-width = <4>;
+@@ -1108,6 +1316,12 @@ usb_1: usb@a600000 {
+ 					  <&gcc GCC_USB30_PRIM_MASTER_CLK>;
+ 			assigned-clock-rates = <19200000>, <133333333>;
+ 
++			interconnects = <&aggre1_noc MASTER_USB3 QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++					<&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++					 &config_noc SLAVE_USB3 QCOM_ICC_TAG_ACTIVE_ONLY>;
++			interconnect-names = "usb-ddr", "apps-usb";
++
+ 			interrupts-extended = <&intc GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>,
+ 					      <&intc GIC_SPI 144 IRQ_TYPE_LEVEL_HIGH>,
+ 					      <&pdc 14 IRQ_TYPE_EDGE_BOTH>,

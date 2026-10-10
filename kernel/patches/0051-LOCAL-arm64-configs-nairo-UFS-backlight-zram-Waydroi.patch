@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:12 +0100
-Subject: [PATCH 51/80] LOCAL: arm64: configs: nairo: UFS, backlight, zram,
+Subject: [PATCH 51/87] LOCAL: arm64: configs: nairo: UFS, backlight, zram,
  Waydroid
 
 - UFS glue and PHY, and the WLED backlight, built in.

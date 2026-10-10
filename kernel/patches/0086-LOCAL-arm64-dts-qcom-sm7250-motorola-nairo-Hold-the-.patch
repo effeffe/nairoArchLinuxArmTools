@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sat, 10 Oct 2026 22:47:30 +0100
+Subject: [PATCH 86/87] LOCAL: arm64: dts: qcom: sm7250-motorola-nairo: Hold
+ the display paths
+
+Give the simple-framebuffer the two MDP ports' memory paths, with the
+downstream SDE "on" vote (ib 6.4 GB/s per port, qcom,sde-data-bus).
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+index 4ae9c0843..4377c2d2a 100644
+--- a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
++++ b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+@@ -56,6 +56,16 @@ framebuffer0: framebuffer@a0000000 {
+ 			stride = <(1080 * 4)>;
+ 			format = "a8r8g8b8";
+ 			backlight = <&pm8150l_wled>;
++			/*
++			 * The display engine keeps scanning this out: hold its
++			 * memory paths, with the downstream SDE "on" vote (ib
++			 * 6.4 GB/s per MDP port, qcom,sde-data-bus).
++			 */
++			interconnects = <&mmss_noc MASTER_MDP_PORT0 QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++					<&mmss_noc MASTER_MDP_PORT1 QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>;
++			peak-kBps = <6400000>;
+ 		};
+ 	};
+ 

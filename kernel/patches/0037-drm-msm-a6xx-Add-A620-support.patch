@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:07 +0100
-Subject: [PATCH 37/80] drm/msm/a6xx: Add A620 support
+Subject: [PATCH 37/87] drm/msm/a6xx: Add A620 support
 
 Add the Adreno 620 (chip ID 0x06020000) found on SM7250, with values
 from the downstream kgsl adreno_gpu_core_a620: a650 SQE and GMU

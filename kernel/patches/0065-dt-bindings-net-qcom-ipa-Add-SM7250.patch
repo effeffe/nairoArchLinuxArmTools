@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 16:50:50 +0100
-Subject: [PATCH 65/80] dt-bindings: net: qcom,ipa: Add SM7250
+Subject: [PATCH 65/87] dt-bindings: net: qcom,ipa: Add SM7250
 
 SM7250 has IPA v4.7, like SM6350.
 

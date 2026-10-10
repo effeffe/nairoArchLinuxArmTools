@@ -11,3 +11,4 @@ once they are filed.
 | 3-modemmanager-meson-libqmi-minimum.md | ModemManager | draft |
 | 4-libqmi-qmicli-pdc-load-config-free.md | libqmi | draft |
 | 5-tqftpserv-readonly-vendor-fsg.md | tqftpserv | draft |
+| 6-plasma-nm-gsm-initial-eps-dropped.md | plasma-nm | draft |

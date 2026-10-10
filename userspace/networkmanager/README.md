@@ -27,6 +27,11 @@ What it works around:
   `gsm.initial-eps-bearer-password` drops the other from the saved profile.
   Always set both in the same command.
 
+Don't edit the profile in Plasma's network settings: saving it there drops
+all the `gsm.initial-eps-bearer-*` settings (see
+`../../upstream-reports/6-plasma-nm-gsm-initial-eps-dropped.md`). If that
+happens, delete the profile and run the script again.
+
 It needs a ModemManager with the netlink fix (see `../modemmanager`).
 
 NetworkManager warns that it can't set the 1500-byte MTU the modem reports

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 16:50:50 +0100
-Subject: [PATCH 66/80] net: ipa: Add SM7250
+Subject: [PATCH 66/87] net: ipa: Add SM7250
 
 SM7250 uses the same IPA v4.7 as SM6350. Only the IMEM area holding the
 modem tables differs: downstream maps 0x146a9000 for the IPA on SM7250,

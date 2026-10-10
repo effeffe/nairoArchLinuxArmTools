@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 13:33:09 +0100
-Subject: [PATCH 63/80] phy: qcom: qmp-ufs: Use the downstream reset sequence
+Subject: [PATCH 63/87] phy: qcom: qmp-ufs: Use the downstream reset sequence
  on SM7250
 
 Downstream (phy-qcom-ufs-qmp-v4-lito.c) asserts the PCS SW_RESET before
