@@ -27,6 +27,8 @@ initramfs/third-party/     (repo) busybox .config, dropbear localoptions.h
 initramfs/bin/             busybox and dropbear, static aarch64 (build them)
 initramfs/firmware/        touch firmware from the vendor partition
 kernel/nairo.config        (repo) config fragment (also in the patch series)
+userspace/                 (repo) patches and setup for libqmi, tqftpserv, ModemManager, NetworkManager
+upstream-reports/          (repo) drafts of the bug reports for those projects
 kernel/patches/            (repo) the nairo branch as a patch series
 linux/                     linux-next next-20261002 with kernel/patches applied
 build/                     kernel build output (O=../build)
