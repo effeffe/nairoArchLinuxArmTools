@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 17:27:29 +0100
-Subject: [PATCH 070/102] arm64: dts: qcom: sm7250-motorola-nairo: Set the
+Subject: [PATCH 070/112] arm64: dts: qcom: sm7250-motorola-nairo: Set the
  Wi-Fi calibration variant
 
 The WCN3990 reports board ID 0xff, so ath10k fell back to generic board

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:20 +0100
-Subject: [PATCH 022/102] arm64: dts: qcom: sm7250: Add TLMM
+Subject: [PATCH 022/112] arm64: dts: qcom: sm7250: Add TLMM
 
 Add the pin controller node: three tiles at 0x0f100000/0x0f500000/
 0x0f900000 (downstream describes one 0x0f000000 region with tile offsets),

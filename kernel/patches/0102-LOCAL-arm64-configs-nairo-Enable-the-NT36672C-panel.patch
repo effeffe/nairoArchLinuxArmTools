@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:06 +0100
-Subject: [PATCH 102/102] LOCAL: arm64: configs: nairo: Enable the NT36672C
+Subject: [PATCH 102/112] LOCAL: arm64: configs: nairo: Enable the NT36672C
  panel
 
 These changes were written with the help of an LLM and checked by a human.

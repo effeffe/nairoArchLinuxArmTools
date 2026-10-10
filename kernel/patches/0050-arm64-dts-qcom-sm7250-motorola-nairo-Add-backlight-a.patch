@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:12 +0100
-Subject: [PATCH 050/102] arm64: dts: qcom: sm7250-motorola-nairo: Add
+Subject: [PATCH 050/112] arm64: dts: qcom: sm7250-motorola-nairo: Add
  backlight and fuel gauge
 
 - Enable the PM8150L WLED with the downstream settings (four strings,

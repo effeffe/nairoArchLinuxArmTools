@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:16 +0100
-Subject: [PATCH 011/102] dt-bindings: usb: qcom,snps-dwc3: Add SM7250
+Subject: [PATCH 011/112] dt-bindings: usb: qcom,snps-dwc3: Add SM7250
 
 Add qcom,sm7250-dwc3. The controller uses the SM8250-style six clocks; its
 interrupt set has no hs_phy_irq (downstream lists dp/dm_hs_phy, pwr_event

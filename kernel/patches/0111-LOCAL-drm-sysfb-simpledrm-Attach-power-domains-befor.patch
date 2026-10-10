@@ -1,0 +1,41 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sun, 11 Oct 2026 00:52:23 +0100
+Subject: [PATCH 111/112] LOCAL: drm/sysfb: simpledrm: Attach power domains
+ before enabling clocks
+
+Clocks inside a collapsed power domain can't turn on: with the MDSS
+GDSC listed, enabling the display clocks first fails with "status stuck
+at 'off'".
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ drivers/gpu/drm/sysfb/simpledrm.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/sysfb/simpledrm.c b/drivers/gpu/drm/sysfb/simpledrm.c
+index dc992e1dc..c9cef2334 100644
+--- a/drivers/gpu/drm/sysfb/simpledrm.c
++++ b/drivers/gpu/drm/sysfb/simpledrm.c
+@@ -724,13 +724,14 @@ static struct simpledrm_device *simpledrm_device_create(struct drm_driver *drv,
+ 	 * Hardware settings
+ 	 */
+ 
+-	ret = simpledrm_device_init_clocks(sdev);
++	/* Power domains first: clocks inside a collapsed domain can't turn on */
++	ret = simpledrm_device_attach_genpd(sdev);
+ 	if (ret)
+ 		return ERR_PTR(ret);
+-	ret = simpledrm_device_init_regulators(sdev);
++	ret = simpledrm_device_init_clocks(sdev);
+ 	if (ret)
+ 		return ERR_PTR(ret);
+-	ret = simpledrm_device_attach_genpd(sdev);
++	ret = simpledrm_device_init_regulators(sdev);
+ 	if (ret)
+ 		return ERR_PTR(ret);
+ 	if (of_node) {

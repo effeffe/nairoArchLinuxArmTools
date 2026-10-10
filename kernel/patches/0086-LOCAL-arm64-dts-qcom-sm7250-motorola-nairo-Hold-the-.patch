@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 22:47:30 +0100
-Subject: [PATCH 086/102] LOCAL: arm64: dts: qcom: sm7250-motorola-nairo: Hold
+Subject: [PATCH 086/112] LOCAL: arm64: dts: qcom: sm7250-motorola-nairo: Hold
  the display paths
 
 Give the simple-framebuffer the two MDP ports' memory paths, with the

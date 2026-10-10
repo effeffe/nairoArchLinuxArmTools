@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 22:47:30 +0100
-Subject: [PATCH 085/102] LOCAL: drm/sysfb: simpledrm: Vote interconnect
+Subject: [PATCH 085/112] LOCAL: drm/sysfb: simpledrm: Vote interconnect
  bandwidth for the framebuffer
 
 The display engine keeps scanning out the firmware framebuffer, but no

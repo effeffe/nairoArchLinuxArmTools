@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:16 +0100
-Subject: [PATCH 012/102] dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Add
+Subject: [PATCH 012/112] dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Add
  SM7250
 
 Add qcom,sm7250-qmp-ufs-phy, using the ref/ref_aux/qref clock set.

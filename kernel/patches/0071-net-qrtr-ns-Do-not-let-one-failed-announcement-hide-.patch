@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 18:20:15 +0100
-Subject: [PATCH 071/102] net: qrtr: ns: Do not let one failed announcement
+Subject: [PATCH 071/112] net: qrtr: ns: Do not let one failed announcement
  hide the others
 
 When a remote node says hello, announce_servers() stops at the first

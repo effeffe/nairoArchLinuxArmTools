@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 21:08:53 +0100
-Subject: [PATCH 077/102] dt-bindings: nvmem: qfprom: Add SM7250
+Subject: [PATCH 077/112] dt-bindings: nvmem: qfprom: Add SM7250
 
 These changes were written with the help of an LLM and checked by a human.
 

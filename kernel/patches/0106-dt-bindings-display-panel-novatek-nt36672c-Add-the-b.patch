@@ -1,0 +1,50 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sun, 11 Oct 2026 00:35:04 +0100
+Subject: [PATCH 106/112] dt-bindings: display: panel: novatek,nt36672c: Add
+ the bias supplies
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ .../bindings/display/panel/novatek,nt36672c.yaml       | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/display/panel/novatek,nt36672c.yaml b/Documentation/devicetree/bindings/display/panel/novatek,nt36672c.yaml
+index 95a81ab49..5dfd8c555 100644
+--- a/Documentation/devicetree/bindings/display/panel/novatek,nt36672c.yaml
++++ b/Documentation/devicetree/bindings/display/panel/novatek,nt36672c.yaml
+@@ -27,6 +27,12 @@ properties:
+   vddio-supply:
+     description: 1.8 V I/O supply
+ 
++  vsp-supply:
++    description: Positive LCD bias supply (+5.5 V)
++
++  vsn-supply:
++    description: Negative LCD bias supply (-5.5 V)
++
+   reset-gpios: true
+   backlight: true
+   port: true
+@@ -35,6 +41,8 @@ required:
+   - compatible
+   - reg
+   - vddio-supply
++  - vsp-supply
++  - vsn-supply
+   - reset-gpios
+   - port
+ 
+@@ -55,6 +63,8 @@ examples:
+             backlight = <&wled>;
+             reset-gpios = <&pmic_gpios 3 GPIO_ACTIVE_LOW>;
+             vddio-supply = <&vreg_l1c_1p8>;
++            vsp-supply = <&lcdb_ldo>;
++            vsn-supply = <&lcdb_ncp>;
+ 
+             port {
+                 panel_in: endpoint {

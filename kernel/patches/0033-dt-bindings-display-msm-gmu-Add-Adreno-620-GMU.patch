@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:06 +0100
-Subject: [PATCH 033/102] dt-bindings: display/msm/gmu: Add Adreno 620 GMU
+Subject: [PATCH 033/112] dt-bindings: display/msm/gmu: Add Adreno 620 GMU
 
 The A620 GMU on SM7250 has the same register regions (gmu, rscc,
 gmu_pdc, gmu_pdc_seq) and clocks as the A650 GMU.
