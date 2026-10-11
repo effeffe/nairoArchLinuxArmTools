@@ -42,7 +42,7 @@ mkbootimg --header_version 2 --pagesize 4096 --base 0x0 \
 	--kernel build/arch/arm64/boot/Image \
 	--ramdisk initramfs/initramfs.cpio.gz \
 	--dtb build/arch/arm64/boot/dts/qcom/$DTB.dtb \
-	--cmdline "${CMDLINE:-earlycon console=tty0 ignore_loglevel clk_ignore_unused pd_ignore_unused panic=10 nairo.reboot=120 nairo.root=PARTLABEL=userdata}" \
+	--cmdline "${CMDLINE:-earlycon console=tty0 ignore_loglevel fw_devlink.sync_state=timeout panic=10 nairo.reboot=120 nairo.root=PARTLABEL=userdata}" \
 	-o out/${OUT:=nairo-boot}.img
 # the boot partition is 96 MiB (stock boot.img size)
 SZ=$(stat -c %s out/$OUT.img)

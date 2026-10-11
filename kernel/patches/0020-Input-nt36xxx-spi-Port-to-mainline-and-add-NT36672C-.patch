@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:19 +0100
-Subject: [PATCH 020/113] Input: nt36xxx-spi: Port to mainline and add NT36672C
+Subject: [PATCH 020/116] Input: nt36xxx-spi: Port to mainline and add NT36672C
  support
 
 Changes on top of the imported vendor driver:

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:02 +0100
-Subject: [PATCH 092/113] dt-bindings: display: msm: Add SM7250 MDSS
+Subject: [PATCH 092/116] dt-bindings: display: msm: Add SM7250 MDSS
 
 Add the SM7250 MDSS, DPU and DSI controller compatibles. The MDSS has a
 third interconnect path for the CPU to register bus.

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:52:23 +0100
-Subject: [PATCH 112/113] arm64: dts: qcom: sm7250-motorola-nairo: Use 25 mA
+Subject: [PATCH 112/116] arm64: dts: qcom: sm7250-motorola-nairo: Use 25 mA
  per WLED string
 
 Downstream uses 25 mA on PM8150L v2.0 and later; this PMIC is v3.0.

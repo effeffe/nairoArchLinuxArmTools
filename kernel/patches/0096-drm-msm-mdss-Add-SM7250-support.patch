@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:04 +0100
-Subject: [PATCH 096/113] drm/msm/mdss: Add SM7250 support
+Subject: [PATCH 096/116] drm/msm/mdss: Add SM7250 support
 
 Same register bus vote as SM8250 (76.8 MB/s, the downstream mdss_reg
 bus vote).

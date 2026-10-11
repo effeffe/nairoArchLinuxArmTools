@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 22:05:10 +0100
-Subject: [PATCH 075/113] scsi: ufs: qcom: Map 150 MHz UniPro to HS-G3 on
+Subject: [PATCH 075/116] scsi: ufs: qcom: Map 150 MHz UniPro to HS-G3 on
  SM7250
 
 ufs_qcom_freq_to_gear_speed() maps a 150 MHz UniPro clock to HS-G2, which

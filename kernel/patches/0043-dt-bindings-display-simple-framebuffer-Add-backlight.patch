@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:10 +0100
-Subject: [PATCH 043/113] dt-bindings: display: simple-framebuffer: Add
+Subject: [PATCH 043/116] dt-bindings: display: simple-framebuffer: Add
  backlight
 
 Allow describing the backlight of the panel that shows the framebuffer,

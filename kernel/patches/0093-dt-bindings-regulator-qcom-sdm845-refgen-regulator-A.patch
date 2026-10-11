@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:02 +0100
-Subject: [PATCH 093/113] dt-bindings: regulator: qcom,sdm845-refgen-regulator:
+Subject: [PATCH 093/116] dt-bindings: regulator: qcom,sdm845-refgen-regulator:
  Add SM7250
 
 The SM7250 refgen is the SM8250 type (downstream: refgen-kona).

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:17 +0100
-Subject: [PATCH 016/113] scsi: ufs: qcom: Restrict SM7250 to a 32-bit DMA mask
+Subject: [PATCH 016/116] scsi: ufs: qcom: Restrict SM7250 to a 32-bit DMA mask
 
 On SM7250 the UFS host's DMA does not reach memory above 4 GiB while no
 SMMU stream ID is described for it: transfer request descriptors placed

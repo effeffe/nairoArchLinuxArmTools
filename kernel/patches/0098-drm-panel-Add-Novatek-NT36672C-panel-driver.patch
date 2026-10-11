@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:04 +0100
-Subject: [PATCH 098/113] drm/panel: Add Novatek NT36672C panel driver
+Subject: [PATCH 098/116] drm/panel: Add Novatek NT36672C panel driver
 
 Add a driver for the 6.7" 1080x2520 Tianma NT36672C panel of the
 Motorola moto g 5G plus: video mode over four lanes with DSC 1.1 (8 bpc,

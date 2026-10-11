@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:03 +0100
-Subject: [PATCH 094/113] dt-bindings: display: panel: Add Novatek NT36672C
+Subject: [PATCH 094/116] dt-bindings: display: panel: Add Novatek NT36672C
  based panels
 
 Document the 6.7" 1080x2520 Tianma NT36672C DSC panel of the Motorola

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 4 Oct 2026 16:28:17 +0100
-Subject: [PATCH 015/113] phy: qcom: qmp-ufs: Add SM7250 support
+Subject: [PATCH 015/116] phy: qcom: qmp-ufs: Add SM7250 support
 
 The SM7250 (lito) UFS PHY does not match any existing table set: its COM
 block is QMP v4, its RX lanes use the v5 layout, and its TX lanes place the

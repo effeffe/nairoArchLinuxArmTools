@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:06 +0100
-Subject: [PATCH 035/113] soc: qcom: ubwc: Add SM7250
+Subject: [PATCH 035/116] soc: qcom: ubwc: Add SM7250
 
 SM7250 uses UBWC 3.0 with highest bank bit 14, as in the downstream kgsl
 device tree (qcom,ubwc-mode = 3, qcom,highest-bank-bit = 14).

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:39 +0000
-Subject: [PATCH 002/113] clk: qcom: Add Global Clock Controller (GCC) driver
+Subject: [PATCH 002/116] clk: qcom: Add Global Clock Controller (GCC) driver
  for SM7250
 
 Add support for the global clock controller found on SM7250

@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 15:02:08 +0100
-Subject: [PATCH 041/113] LOCAL: arm64: configs: nairo: Build in gpucc, disable
+Subject: [PATCH 041/116] LOCAL: arm64: configs: nairo: Build in gpucc, disable
  DMABUF_DEBUG
 
 The GPU SMMU gives up on the GPU clock controller after the 10 s

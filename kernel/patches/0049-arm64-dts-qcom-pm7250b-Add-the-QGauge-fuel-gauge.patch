@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:12 +0100
-Subject: [PATCH 049/113] arm64: dts: qcom: pm7250b: Add the QGauge fuel gauge
+Subject: [PATCH 049/116] arm64: dts: qcom: pm7250b: Add the QGauge fuel gauge
 
 Describe the QG block and the SDAM it keeps its state in, both from the
 downstream device tree. Disabled by default.

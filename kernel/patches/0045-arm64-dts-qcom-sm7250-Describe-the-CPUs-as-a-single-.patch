@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Mon, 5 Oct 2026 17:03:11 +0100
-Subject: [PATCH 045/113] arm64: dts: qcom: sm7250: Describe the CPUs as a
+Subject: [PATCH 045/116] arm64: dts: qcom: sm7250: Describe the CPUs as a
  single cluster
 
 The topology parser looks for core0, core1, ... in each cluster, so the
