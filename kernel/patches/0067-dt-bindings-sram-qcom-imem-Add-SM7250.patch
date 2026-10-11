@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Wed, 7 Oct 2026 16:50:50 +0100
-Subject: [PATCH 067/112] dt-bindings: sram: qcom,imem: Add SM7250
+Subject: [PATCH 067/113] dt-bindings: sram: qcom,imem: Add SM7250
 
 Add the SM7250 IMEM compatible, and allow it the reboot-mode child like
 the older SoCs whose bootloaders read the restart reason from IMEM.

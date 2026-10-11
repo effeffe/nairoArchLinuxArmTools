@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:35:04 +0100
-Subject: [PATCH 106/112] dt-bindings: display: panel: novatek,nt36672c: Add
+Subject: [PATCH 106/113] dt-bindings: display: panel: novatek,nt36672c: Add
  the bias supplies
 
 These changes were written with the help of an LLM and checked by a human.

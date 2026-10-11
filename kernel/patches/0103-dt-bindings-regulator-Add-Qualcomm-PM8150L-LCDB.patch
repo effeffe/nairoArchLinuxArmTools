@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:35:04 +0100
-Subject: [PATCH 103/112] dt-bindings: regulator: Add Qualcomm PM8150L LCDB
+Subject: [PATCH 103/113] dt-bindings: regulator: Add Qualcomm PM8150L LCDB
 
 Document the LCD bias block of PM8150L and list it as a PMIC child.
 

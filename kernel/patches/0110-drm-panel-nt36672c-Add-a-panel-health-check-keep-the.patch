@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:52:22 +0100
-Subject: [PATCH 110/112] drm/panel: nt36672c: Add a panel health check, keep
+Subject: [PATCH 110/113] drm/panel: nt36672c: Add a panel health check, keep
  the brightness level
 
 Poll the power mode every 5 s while the panel is enabled, as the

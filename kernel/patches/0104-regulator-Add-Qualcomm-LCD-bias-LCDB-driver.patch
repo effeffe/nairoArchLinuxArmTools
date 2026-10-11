@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:35:04 +0100
-Subject: [PATCH 104/112] regulator: Add Qualcomm LCD bias (LCDB) driver
+Subject: [PATCH 104/113] regulator: Add Qualcomm LCD bias (LCDB) driver
 
 The LCDB block of PM8150L supplies the positive (LDO) and negative (NCP)
 bias of LCD panels from one boost stage: two output voltages, one module

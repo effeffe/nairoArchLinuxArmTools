@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 23:13:21 +0100
-Subject: [PATCH 089/112] clk: qcom: dispcc-sm8250: Add SM7250 support
+Subject: [PATCH 089/113] clk: qcom: dispcc-sm8250: Add SM7250 support
 
 All clocks SM7250 shares with SM8250 sit at the same offsets. SM7250
 has no PLL1: the mux input it uses on SM8250 carries GCC's GPLL0

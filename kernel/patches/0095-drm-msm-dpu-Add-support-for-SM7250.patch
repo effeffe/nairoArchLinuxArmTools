@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:03 +0100
-Subject: [PATCH 095/112] drm/msm/dpu: Add support for SM7250
+Subject: [PATCH 095/113] drm/msm/dpu: Add support for SM7250
 
 SM7250 has DPU 6.1 (MDSS hardware version 0x60010000): two VIG and
 three DMA pipes, four mixers, CTLs and pingpongs, two DSPPs, two DSC

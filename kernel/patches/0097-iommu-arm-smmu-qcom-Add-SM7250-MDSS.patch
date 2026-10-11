@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:16:04 +0100
-Subject: [PATCH 097/112] iommu/arm-smmu-qcom: Add SM7250 MDSS
+Subject: [PATCH 097/113] iommu/arm-smmu-qcom: Add SM7250 MDSS
 
 Without it the display subsystem gets a translated domain at SMMU probe,
 and the scanout of the bootloader splash faults (SIDs 0xb40/0xf40) long

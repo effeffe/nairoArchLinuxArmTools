@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:47 +0000
-Subject: [PATCH 006/112] arm64: dts: qcom: Add SM7250 devicetree file
+Subject: [PATCH 006/113] arm64: dts: qcom: Add SM7250 devicetree file
 
 Add base devicetree file for SM7250 SoC.
 This file adds the basic nodes like cpu, psci and other required

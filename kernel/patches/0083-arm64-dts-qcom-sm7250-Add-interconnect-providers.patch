@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 22:47:29 +0100
-Subject: [PATCH 083/112] arm64: dts: qcom: sm7250: Add interconnect providers
+Subject: [PATCH 083/113] arm64: dts: qcom: sm7250: Add interconnect providers
 
 Add the NoC providers at the addresses of the downstream QoS windows,
 with the virtual providers as children of the NoC whose space they

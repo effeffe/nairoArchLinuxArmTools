@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sat, 10 Oct 2026 22:47:29 +0100
-Subject: [PATCH 081/112] dt-bindings: interconnect: Add Qualcomm SM7250
+Subject: [PATCH 081/113] dt-bindings: interconnect: Add Qualcomm SM7250
 
 Document the RPMh network-on-chip providers of SM7250. As on SM7150,
 the virtual providers (mc-virt, ipa-virt, qup-virt) share the register

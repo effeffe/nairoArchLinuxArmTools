@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Filippo Falezza <filippo.falezza@outlook.it>
 Date: Sun, 11 Oct 2026 00:35:05 +0100
-Subject: [PATCH 107/112] drm/panel: nt36672c: Switch the bias supplies, add 90
+Subject: [PATCH 107/113] drm/panel: nt36672c: Switch the bias supplies, add 90
  Hz
 
 Power the panel up as downstream: vddio, then the +/-5.5 V bias with a
