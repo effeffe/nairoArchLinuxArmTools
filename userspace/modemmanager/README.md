@@ -28,3 +28,20 @@ which is not in a release yet. Two ways to get it:
   fix is out. The patch applies cleanly to 1.24.2.
 
 Once a release has the fix, go back to the official packages.
+
+## Keeping the modem across suspend
+
+By default ModemManager removes every modem when the system suspends and
+probes again on resume. The nairo modem (QRTR, `qcom-soc` plugin) stays
+powered in s2idle and is not announced again, so after the first suspend
+`mmcli -L` reports "No modems were found" and calls and SMS stop working,
+although the modem remoteproc is still running.
+
+`--test-quick-suspend-resume` keeps the modem object and only resyncs its
+state on resume, which is what a modem that stays on needs. Install the
+drop-in:
+
+    sudo install -Dm644 quick-resume.conf \
+        /etc/systemd/system/ModemManager.service.d/quick-resume.conf
+    sudo systemctl daemon-reload
+    sudo systemctl restart ModemManager

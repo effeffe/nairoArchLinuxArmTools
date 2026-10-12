@@ -16,3 +16,4 @@
 *.img
 *.tar.gz
 __pycache__/
+CLAUDE.md
