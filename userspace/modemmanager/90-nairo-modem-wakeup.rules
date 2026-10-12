@@ -1,0 +1,6 @@
+# Let messages from the modem (incoming call, SMS) wake the system from
+# s2idle. The GLINK edge itself sends no uevents, so match its IPCRTR
+# channel, which is re-created after every modem restart, and enable
+# wakeup on the parent edge device. Needs the qcom_glink_smem wakeup patch.
+ACTION=="add", SUBSYSTEM=="rpmsg", KERNEL=="4080000.remoteproc:glink-edge.IPCRTR.*", \
+  RUN+="/bin/sh -c 'echo enabled > /sys%p/../power/wakeup'"
