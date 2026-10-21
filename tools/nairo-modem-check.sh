@@ -8,8 +8,11 @@
 # initialization"). The restart always works, so do it early instead.
 services() { qrtr-lookup | awk 'NR > 1 && $4 == 0' | wc -l; }
 
+# the modem's remoteproc, found by name: the ADSP may come first
+rproc=$(grep -lx modem /sys/class/remoteproc/*/name 2>/dev/null)
+rproc=${rproc%/name}
 for i in $(seq 1 30); do
-	[ "$(cat /sys/class/remoteproc/remoteproc0/state 2>/dev/null)" = running ] && break
+	[ "$(cat "$rproc/state" 2>/dev/null)" = running ] && break
 	sleep 1
 done
 sleep 15
