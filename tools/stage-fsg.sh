@@ -4,7 +4,7 @@
 # /usr/lib/firmware/qcom/sm7250/motorola/nairo/fsg/. The patched tqftpserv
 # (userspace/tqftpserv) serves it to the modem as /readonly/vendor/fsg/.
 #
-# Usage: tools/stage-fsg.sh rmtfs_backup/modem_fsg out/fsg
+# Usage: tools/stage-fsg.sh ../backups/rmtfs_backup/modem_fsg out/fsg
 set -eu
 img=$1 out=$2
 [ -e "$out" ] && { echo "$out exists" >&2; exit 1; }
