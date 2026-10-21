@@ -1,5 +1,5 @@
 #!/bin/sh
-# Pack the modem and Wi-Fi firmware from the LineageOS modem partition dump
+# Pack the audio and compute DSP, modem and Wi-Fi firmware from the LineageOS modem partition dump
 # (vendor_firmware/mnt_image) into out/nairo-firmware.tar.gz, which unpacks to
 # /usr/lib/firmware/qcom/sm7250/motorola/nairo/. Independent of the kernel
 # version, so it is installed once instead of travelling in every boot image.
@@ -9,7 +9,11 @@ S=out/fwtree
 D=$S/usr/lib/firmware/qcom/sm7250/motorola/nairo
 rm -rf "$S"
 mkdir -p "$D"
-cp vendor_firmware/mnt_image/modem.mdt vendor_firmware/mnt_image/modem.b* \
+cp vendor_firmware/mnt_image/adsp2.mdt vendor_firmware/mnt_image/adsp2.b* \
+   vendor_firmware/mnt_image/cdsp.mdt vendor_firmware/mnt_image/cdsp.b* \
+   vendor_firmware/mnt_image/modem.mdt vendor_firmware/mnt_image/modem.b* \
    vendor_firmware/mnt_image/wlanmdsp.mbn vendor_firmware/mnt_image/bdwlan.* "$D/"
+# speaker amplifier register table (AW882xx)
+cp vendor_firmware/firmware/aw882xx_spk_reg.bin "$D/"
 tar -C "$S" --owner=0 --group=0 -czf out/nairo-firmware.tar.gz usr
 echo "out/nairo-firmware.tar.gz: $(ls "$D" | wc -l) files, $(du -sh "$D" | cut -f1)"
