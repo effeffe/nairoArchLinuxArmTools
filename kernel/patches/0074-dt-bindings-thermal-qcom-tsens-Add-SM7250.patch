@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sat, 10 Oct 2026 21:08:53 +0100
+Subject: [PATCH 074/159] dt-bindings: thermal: qcom-tsens: Add SM7250
+
+SM7250 has two TSENS v2 controllers laid out like the SM8250 ones.
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ Documentation/devicetree/bindings/thermal/qcom-tsens.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml b/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml
+index c78074fbcecf..e6b290f18ecc 100644
+--- a/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml
++++ b/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml
+@@ -82,6 +82,7 @@ properties:
+               - qcom,sm6115-tsens
+               - qcom,sm6350-tsens
+               - qcom,sm6375-tsens
++              - qcom,sm7250-tsens
+               - qcom,sm8150-tsens
+               - qcom,sm8250-tsens
+               - qcom,sm8350-tsens

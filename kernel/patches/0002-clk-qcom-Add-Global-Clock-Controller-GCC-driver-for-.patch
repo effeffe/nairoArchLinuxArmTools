@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:39 +0000
-Subject: [PATCH 002/116] clk: qcom: Add Global Clock Controller (GCC) driver
+Subject: [PATCH 002/159] clk: qcom: Add Global Clock Controller (GCC) driver
  for SM7250
 
 Add support for the global clock controller found on SM7250
@@ -16,7 +16,7 @@ Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
  create mode 100644 drivers/clk/qcom/gcc-sm7250.c
 
 diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index 27d0ab24d..e425b93d4 100644
+index 27d0ab24d50a..e425b93d44f0 100644
 --- a/drivers/clk/qcom/Kconfig
 +++ b/drivers/clk/qcom/Kconfig
 @@ -1747,6 +1747,15 @@ config SM_GCC_7150
@@ -36,7 +36,7 @@ index 27d0ab24d..e425b93d4 100644
  	tristate "Milos Global Clock Controller"
  	depends on ARM64 || COMPILE_TEST
 diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index 6affb5073..290bd2e9c 100644
+index 6affb5073f26..290bd2e9c6d0 100644
 --- a/drivers/clk/qcom/Makefile
 +++ b/drivers/clk/qcom/Makefile
 @@ -192,6 +192,7 @@ obj-$(CONFIG_SM_GCC_6125) += gcc-sm6125.o
@@ -49,7 +49,7 @@ index 6affb5073..290bd2e9c 100644
  obj-$(CONFIG_SM_GCC_8350) += gcc-sm8350.o
 diff --git a/drivers/clk/qcom/gcc-sm7250.c b/drivers/clk/qcom/gcc-sm7250.c
 new file mode 100644
-index 000000000..37a429e31
+index 000000000000..37a429e3132e
 --- /dev/null
 +++ b/drivers/clk/qcom/gcc-sm7250.c
 @@ -0,0 +1,2275 @@

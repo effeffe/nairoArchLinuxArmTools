@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Sreeshankar K <sreeshankar0910@gmail.com>
 Date: Tue, 1 Sep 2026 09:24:38 +0000
-Subject: [PATCH 001/116] dt-bindings: clock: Add SM7250 global clock
+Subject: [PATCH 001/159] dt-bindings: clock: Add SM7250 global clock
  controller
 
 Add device tree bindings for global clock controller on SM7250 SoC.
@@ -15,7 +15,7 @@ Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
  create mode 100644 include/dt-bindings/clock/qcom,sm7250-gcc.h
 
 diff --git a/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml b/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml
-index b4ad2ad14..39a2d2839 100644
+index b4ad2ad14d85..39a2d28394b5 100644
 --- a/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml
 +++ b/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml
 @@ -4,13 +4,14 @@
@@ -44,7 +44,7 @@ index b4ad2ad14..39a2d2839 100644
      items:
 diff --git a/include/dt-bindings/clock/qcom,sm7250-gcc.h b/include/dt-bindings/clock/qcom,sm7250-gcc.h
 new file mode 100644
-index 000000000..765fdc38f
+index 000000000000..765fdc38fce6
 --- /dev/null
 +++ b/include/dt-bindings/clock/qcom,sm7250-gcc.h
 @@ -0,0 +1,163 @@

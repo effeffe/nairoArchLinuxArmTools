@@ -1,0 +1,42 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sat, 10 Oct 2026 23:13:22 +0100
+Subject: [PATCH 089/159] arm64: dts: qcom: sm7250-motorola-nairo: Keep the
+ splash display powered
+
+Without consumers, the display clock controller powers the MDSS GDSC
+off as soon as it probes, which blanks the screen under simpledrm. List
+the GDSC and the clocks the scanout needs in the simple-framebuffer
+node, so simpledrm holds them.
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+index 4377c2d2a77c..52bea5d876a5 100644
+--- a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
++++ b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+@@ -66,6 +66,17 @@ &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
+ 					<&mmss_noc MASTER_MDP_PORT1 QCOM_ICC_TAG_ALWAYS
+ 					 &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>;
+ 			peak-kBps = <6400000>;
++			/*
++			 * Keep the display engine powered and clocked while the
++			 * firmware framebuffer is in use: without consumers, the
++			 * display clock controller powers the MDSS domain off.
++			 */
++			power-domains = <&dispcc MDSS_GDSC>;
++			clocks = <&gcc GCC_DISP_AHB_CLK>,
++				 <&gcc GCC_DISP_HF_AXI_CLK>,
++				 <&dispcc DISP_CC_MDSS_AHB_CLK>,
++				 <&dispcc DISP_CC_MDSS_MDP_CLK>,
++				 <&dispcc DISP_CC_MDSS_VSYNC_CLK>;
+ 		};
+ 	};
+ 

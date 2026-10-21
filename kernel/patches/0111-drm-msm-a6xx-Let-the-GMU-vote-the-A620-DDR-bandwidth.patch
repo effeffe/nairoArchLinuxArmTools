@@ -1,0 +1,41 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sun, 11 Oct 2026 01:15:50 +0100
+Subject: [PATCH 111/159] drm/msm/a6xx: Let the GMU vote the A620 DDR bandwidth
+
+Describe the SH0/MC0/ACV BCMs as on A621, so that the GMU gets a
+bandwidth table built from the opp-peak-kBps of each GPU level and votes
+DDR itself with every frequency change. Tested with the a650 GMU
+firmware 2.1.8: no regression in GPU memory bandwidth (6.1-6.9 GB/s for
+a texture copy at 540 MHz, same as with Linux interconnect votes).
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+index 599494141fea..c92e1f831398 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+@@ -967,6 +967,16 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			.gbif_cx = a640_gbif,
+ 			.gmu_cgc_mode = 0x00020202,
+ 			.prim_fifo_threshold = 0x00010000,
++			.bcms = (const struct a6xx_bcm[]) {
++				{ .name = "SH0", .buswidth = 16 },
++				{ .name = "MC0", .buswidth = 4 },
++				{
++					.name = "ACV",
++					.fixed = true,
++					.perfmode = BIT(3),
++				},
++				{ /* sentinel */ },
++			},
+ 		},
+ 		.speedbins = ADRENO_SPEEDBINS(
+ 			{ 0,    0 },

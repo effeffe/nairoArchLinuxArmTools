@@ -1,0 +1,108 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sat, 10 Oct 2026 22:47:30 +0100
+Subject: [PATCH 083/159] LOCAL: drm/sysfb: simpledrm: Vote interconnect
+ bandwidth for the framebuffer
+
+The display engine keeps scanning out the firmware framebuffer, but no
+driver votes bandwidth for it. With the SM7250 interconnect driver, the
+multimedia NoC and DDR drop low enough for the scanout to underrun
+(flicker, artifacts). Hold a vote on each path of the
+simple-framebuffer node's interconnects property: the scanout rate as
+average and an optional peak-kBps property (default twice the
+scanout rate) as peak. Not for upstream; goes away with the real
+display driver.
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ drivers/gpu/drm/sysfb/simpledrm.c | 59 +++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+
+diff --git a/drivers/gpu/drm/sysfb/simpledrm.c b/drivers/gpu/drm/sysfb/simpledrm.c
+index c566ffbed225..dc992e1dc9e5 100644
+--- a/drivers/gpu/drm/sysfb/simpledrm.c
++++ b/drivers/gpu/drm/sysfb/simpledrm.c
+@@ -3,6 +3,7 @@
+ #include <linux/aperture.h>
+ #include <linux/backlight.h>
+ #include <linux/clk.h>
++#include <linux/interconnect.h>
+ #include <linux/minmax.h>
+ #include <linux/of_address.h>
+ #include <linux/of_clk.h>
+@@ -634,6 +635,61 @@ static const struct drm_mode_config_funcs simpledrm_mode_config_funcs = {
+  * Init / Cleanup
+  */
+ 
++/*
++ * Interconnects
++ *
++ * The display engine keeps scanning out the firmware framebuffer, but nothing
++ * in Linux knows about it. Once the interconnect providers take over from the
++ * bootloader's votes, the memory paths it uses can be clocked down far enough
++ * for the scanout to underrun. Hold a bandwidth vote on each path listed in
++ * the "interconnects" property of the simple-framebuffer node: the scanout
++ * rate at 60 Hz as average, split over the paths, and the "peak-kBps"
++ * property (default: twice the scanout rate) as peak.
++ */
++
++static void simpledrm_icc_put(void *data)
++{
++	icc_put(data);
++}
++
++static int simpledrm_device_init_interconnects(struct simpledrm_device *sdev,
++					       unsigned int stride, unsigned int height)
++{
++	struct drm_device *dev = &sdev->sysfb.dev;
++	struct device *ddev = dev->dev;
++	struct icc_path *path;
++	u32 avg, peak;
++	int i, count, ret;
++
++	count = of_count_phandle_with_args(ddev->of_node, "interconnects",
++					   "#interconnect-cells");
++	if (count <= 0)
++		return 0;
++
++	avg = (u32)min_t(u64, div_u64((u64)stride * height * 60, 1000), U32_MAX);
++	if (of_property_read_u32(ddev->of_node, "peak-kBps", &peak))
++		peak = avg * 2;
++	avg /= count / 2;
++
++	for (i = 0; i < count / 2; i++) {
++		path = of_icc_get_by_index(ddev, i);
++		if (IS_ERR(path))
++			return dev_err_probe(ddev, PTR_ERR(path),
++					     "failed to get interconnect path %d\n", i);
++		ret = devm_add_action_or_reset(ddev, simpledrm_icc_put, path);
++		if (ret)
++			return ret;
++		ret = icc_set_bw(path, avg, peak);
++		if (ret)
++			return ret;
++	}
++
++	drm_info(dev, "interconnect vote: avg %u peak %u kBps on %d path(s)\n",
++		 avg, peak, count / 2);
++
++	return 0;
++}
++
+ static struct simpledrm_device *simpledrm_device_create(struct drm_driver *drv,
+ 							struct platform_device *pdev)
+ {
+@@ -712,6 +768,9 @@ static struct simpledrm_device *simpledrm_device_create(struct drm_driver *drv,
+ 		mem = simplefb_get_memory_of(dev, of_node);
+ 		if (IS_ERR(mem))
+ 			return ERR_CAST(mem);
++		ret = simpledrm_device_init_interconnects(sdev, stride, height);
++		if (ret)
++			return ERR_PTR(ret);
+ 		panel_node = of_parse_phandle(of_node, "panel", 0);
+ 		if (panel_node) {
+ 			/*

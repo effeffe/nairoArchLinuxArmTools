@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sun, 11 Oct 2026 00:35:04 +0100
+Subject: [PATCH 103/159] arm64: dts: qcom: pm8150l: Add the LCDB
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ arch/arm64/boot/dts/qcom/pm8150l.dtsi | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/pm8150l.dtsi b/arch/arm64/boot/dts/qcom/pm8150l.dtsi
+index 3911d6d0d2e2..dd18ee890347 100644
+--- a/arch/arm64/boot/dts/qcom/pm8150l.dtsi
++++ b/arch/arm64/boot/dts/qcom/pm8150l.dtsi
+@@ -131,6 +131,17 @@ pm8150l_lpg: pwm {
+ 			status = "disabled";
+ 		};
+ 
++		pm8150l_lcdb: lcdb {
++			compatible = "qcom,pm8150l-lcdb";
++			status = "disabled";
++
++			pm8150l_lcdb_ldo: ldo {
++			};
++
++			pm8150l_lcdb_ncp: ncp {
++			};
++		};
++
+ 		pm8150l_wled: leds@d800 {
+ 			compatible = "qcom,pm8150l-wled";
+ 			reg = <0xd800>, <0xd900>;

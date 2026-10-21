@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sun, 11 Oct 2026 00:52:23 +0100
+Subject: [PATCH 110/159] arm64: dts: qcom: sm7250-motorola-nairo: Use 25 mA
+ per WLED string
+
+Downstream uses 25 mA on PM8150L v2.0 and later; this PMIC is v3.0.
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+index d438c64f4ff2..6845c11b1be3 100644
+--- a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
++++ b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+@@ -523,11 +523,11 @@ &pm8150l_lcdb_ncp {
+ &pm8150l_wled {
+ 	/*
+ 	 * Values from the downstream DT: four strings (string-cfg 0xf), 20.5 V
+-	 * OVP, 1050 mA boost limit. Downstream uses 25 mA per string, or 20 mA
+-	 * on PM8150L v1.0; use the lower value until the revision is known.
++	 * OVP, 1050 mA boost limit. Downstream uses 25 mA per string on
++	 * PM8150L v2.0 and later (this one is v3.0), 20 mA on v1.0.
+ 	 */
+ 	qcom,current-boost-limit = <1050>;
+-	qcom,current-limit-microamp = <20000>;
++	qcom,current-limit-microamp = <25000>;
+ 	qcom,ovp-millivolt = <20500>;
+ 	qcom,num-strings = <4>;
+ 

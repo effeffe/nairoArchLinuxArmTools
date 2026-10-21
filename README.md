@@ -31,7 +31,7 @@ userspace/                 (repo) patches and setup for libqmi, tqftpserv, Modem
                            audio: UCM2 profile, WirePlumber/PipeWire configs, q6voiced, callaudiod patch; logind power key
 upstream-reports/          (repo) drafts of the bug reports for those projects
 kernel/patches/            (repo) the nairo branch as a patch series
-linux/                     linux-next next-20261002 with kernel/patches applied
+linux/                     linux-next next-20261021 with kernel/patches applied
 build/                     kernel build output (O=../build)
 vendor_firmware/           firmware extracted from the phone (see below)
 out/                       build artifacts
@@ -41,17 +41,19 @@ out/                       build artifacts
 
 ```
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git linux
-git -C linux checkout -b nairo next-20261002
+git -C linux checkout -b nairo next-20261021
 git -C linux am ../kernel/patches/*.patch
 make -C linux O=../build ARCH=arm64 defconfig nairo.config
 ```
 
 The series contains, in order: the SM7250 v9 base series (pinctrl, clocks,
-device tree; other authors, kept as they were posted), then the nairo work.
+device tree; other authors, kept as they were posted), then the nairo work,
+with the q6voice call audio driver from the sdm845-mainline kernel (its
+authors' commits, without their MAINTAINERS changes).
 Commits marked `LOCAL:` are board or bring-up workarounds that are not meant
 for upstream as they stand. Commits written with an AI assistant say so in
-their message and carry no Signed-off-by; they need human review before any
-submission.
+their message and carry an Assisted-by: trailer; they need human review before
+any submission.
 
 The kernel must be built with a fixed release name (`LOCALVERSION=`, see
 `build-nairo.sh`) so that the module payload matches the kernel.

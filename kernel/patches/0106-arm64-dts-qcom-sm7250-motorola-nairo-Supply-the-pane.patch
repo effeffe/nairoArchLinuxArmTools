@@ -1,0 +1,53 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Filippo Falezza <filippo.falezza@outlook.it>
+Date: Sun, 11 Oct 2026 00:35:05 +0100
+Subject: [PATCH 106/159] arm64: dts: qcom: sm7250-motorola-nairo: Supply the
+ panel bias from the LCDB
+
+These changes were written with the help of an LLM and checked by a human.
+
+Assisted-by: LLM dtschema
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01RmfiVDW3KWZdb9c3iDGRYg
+---
+ .../boot/dts/qcom/sm7250-motorola-nairo.dts   | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+index 889ad6e98a61..d438c64f4ff2 100644
+--- a/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
++++ b/arch/arm64/boot/dts/qcom/sm7250-motorola-nairo.dts
+@@ -447,6 +447,8 @@ panel: panel@0 {
+ 		backlight = <&pm8150l_wled>;
+ 		reset-gpios = <&pm8150l_gpios 3 GPIO_ACTIVE_LOW>;
+ 		vddio-supply = <&vreg_l1c_1p8>;
++		vsp-supply = <&pm8150l_lcdb_ldo>;
++		vsn-supply = <&pm8150l_lcdb_ncp>;
+ 
+ 		pinctrl-0 = <&panel_reset_n>;
+ 		pinctrl-names = "default";
+@@ -500,6 +502,24 @@ vol_up_n: vol-up-n-state {
+ 	};
+ };
+ 
++&pm8150l_lcdb {
++	status = "okay";
++};
++
++&pm8150l_lcdb_ldo {
++	regulator-name = "lcdb_ldo";
++	regulator-min-microvolt = <5500000>;
++	regulator-max-microvolt = <5500000>;
++	regulator-boot-on;
++};
++
++&pm8150l_lcdb_ncp {
++	regulator-name = "lcdb_ncp";
++	regulator-min-microvolt = <5500000>;
++	regulator-max-microvolt = <5500000>;
++	regulator-boot-on;
++};
++
+ &pm8150l_wled {
+ 	/*
+ 	 * Values from the downstream DT: four strings (string-cfg 0xf), 20.5 V
