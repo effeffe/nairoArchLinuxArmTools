@@ -154,10 +154,7 @@ ConditionPathExists=/var/lib/rmtfs/modem_fs2
 
 [Service]
 # a modem restart needs fresh QRTR services, or it stalls in initialisation
-ExecStartPre=-/usr/bin/systemctl restart tqftpserv.service
-ExecStartPre=-/usr/bin/modprobe -r qcom_pd_mapper
-ExecStartPre=/usr/bin/modprobe qcom_pd_mapper
-ExecStartPre=/usr/local/bin/nairo-qrtr-wait
+ExecStartPre=/usr/local/bin/nairo-rmtfs-prep
 ExecStart=
 ExecStart=/usr/bin/rmtfs -o /var/lib/rmtfs -r -s
 UNIT
@@ -237,11 +234,12 @@ W=$R/etc/systemd/system/timers.target.wants
 	ln -s /etc/systemd/system/nairo-slot-success.timer "$W/nairo-slot-success.timer" &&
 	log "enabled nairo-slot-success.timer"; }
 
-# rmtfs waits for the modem's local QRTR services before starting it
-if ! cmp -s /etc/nairo-qrtr-wait "$R/usr/local/bin/nairo-qrtr-wait"; then
-	mkdir -p "$R/usr/local/bin" && cp /etc/nairo-qrtr-wait "$R/usr/local/bin/nairo-qrtr-wait" &&
-		chmod 755 "$R/usr/local/bin/nairo-qrtr-wait" && log "installed nairo-qrtr-wait"
+# rmtfs prepares the modem's QRTR services before starting it (see the script)
+if ! cmp -s /etc/nairo-rmtfs-prep "$R/usr/local/bin/nairo-rmtfs-prep"; then
+	mkdir -p "$R/usr/local/bin" && cp /etc/nairo-rmtfs-prep "$R/usr/local/bin/nairo-rmtfs-prep" &&
+		chmod 755 "$R/usr/local/bin/nairo-rmtfs-prep" && log "installed nairo-rmtfs-prep"
 fi
+rm -f "$R/usr/local/bin/nairo-qrtr-wait"
 
 # Modem: restart it early when its first start stalls, then set it online and
 # open the SIM session before ModemManager looks at it (see the script)

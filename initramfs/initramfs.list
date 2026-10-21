@@ -28,7 +28,7 @@ dir /lib/modules 0755 0 0
 file /etc/arch-prep initramfs/etc/arch-prep 0755 0 0
 file /etc/nairo-slot-success tools/nairo-slot-success.py 0755 0 0
 file /etc/nairo-modem-check tools/nairo-modem-check.sh 0755 0 0
-file /etc/nairo-qrtr-wait tools/nairo-qrtr-wait.sh 0755 0 0
+file /etc/nairo-rmtfs-prep tools/nairo-rmtfs-prep.sh 0755 0 0
 file /lib/modules/nt36xxx_spi.ko initramfs/modules/nt36xxx_spi.ko 0644 0 0
 file /lib/modules/qcom_smbx.ko initramfs/modules/qcom_smbx.ko 0644 0 0
 file /lib/modules/qcom_qg.ko initramfs/modules/qcom_qg.ko 0644 0 0
