@@ -1,0 +1,12 @@
+[Unit]
+Description=Open the ADSP voice call path during modem calls
+After=ModemManager.service sound.target
+
+[Service]
+# VoiceMMode1 is PCM device 3 of the sound card
+ExecStart=/usr/local/bin/q6voiced hw:0,3
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
