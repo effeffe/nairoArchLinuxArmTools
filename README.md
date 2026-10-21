@@ -27,7 +27,8 @@ initramfs/third-party/     (repo) busybox .config, dropbear localoptions.h
 initramfs/bin/             busybox and dropbear, static aarch64 (build them)
 initramfs/firmware/        touch firmware from the vendor partition
 kernel/nairo.config        (repo) config fragment (also in the patch series)
-userspace/                 (repo) patches and setup for libqmi, tqftpserv, ModemManager, NetworkManager; display colour profile
+userspace/                 (repo) patches and setup for libqmi, tqftpserv, ModemManager, NetworkManager; display colour profile;
+                           audio: UCM2 profile, WirePlumber/PipeWire configs, q6voiced, callaudiod patch; logind power key
 upstream-reports/          (repo) drafts of the bug reports for those projects
 kernel/patches/            (repo) the nairo branch as a patch series
 linux/                     linux-next next-20261002 with kernel/patches applied
@@ -60,13 +61,17 @@ The kernel must be built with a fixed release name (`LOCALVERSION=`, see
 Copy it from your own phone, e.g. from a LineageOS/stock install:
 
 - `vendor_firmware/mnt_image/`: the contents of the modem partition
-  (`/vendor/firmware_mnt/image`): `modem.*`, `wlanmdsp.mbn`, `bdwlan.*`,
+  (`/vendor/firmware_mnt/image`): `modem.*`, `adsp2.*` (the ADSP image this
+  phone's adsp_variant fuse selects), `cdsp.*`, `wlanmdsp.mbn`, `bdwlan.*`,
   `ipa_fws.*`, `a620_zap.*`, the `modem_pr/` tree;
-- `vendor_firmware/firmware/novatek_ts_fw.bin`: the touch firmware.
+- `vendor_firmware/firmware/novatek_ts_fw.bin`: the touch firmware;
+- `vendor_firmware/firmware/aw882xx_spk_reg.bin`: the loudspeaker
+  amplifier's register table.
 
 `tools/stage-modules.sh` puts the GPU zap shader, the IPA firmware and
 `modem_pr/` next to the kernel modules; `tools/stage-firmware.sh` packs the
-modem and Wi-Fi firmware for `/usr/lib/firmware/qcom/sm7250/motorola/nairo`.
+DSP, modem, Wi-Fi and amplifier firmware for
+`/usr/lib/firmware/qcom/sm7250/motorola/nairo`.
 
 ## Initramfs binaries
 
